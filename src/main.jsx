@@ -6,11 +6,12 @@ import {
 } from "react-router-dom";
 import App from './App.jsx'
 import './index.css'
-import ErrorPage from './Error/Error-page.jsx';
+
 import Equipes from './Components/Equipes/Equipes.jsx';
 import Noticias from './Components/Noticias/Noticias.jsx';
 import Suporte from './Components/Suporte/Suporte.jsx';
 import Projetos from './Components/Projetos/Projetos.jsx';
+import ErrorPage from './Error/Error2.jsx';
 
 const router = createBrowserRouter([
   {
