@@ -114,7 +114,7 @@ export default function Hero() {
           <div className="hidden sm:mb-8 sm:flex sm:justify-center motion-safe:animate-bounce">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Descubra as novidades do IFRO{' '}
-              <a href="#" className="font-semibold text-green-600">
+              <a href="https://portal.ifro.edu.br/calama/noticias/" className="font-semibold text-green-600">
                 <span className="absolute inset-0  " aria-hidden="true" />
                 Leia mais <span aria-hidden="true">&rarr;</span>
               </a>
@@ -122,11 +122,10 @@ export default function Hero() {
           </div>
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Projetos do GPMecatronica
+              Projetos do GPM
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat fugiat aliqua.
+              Descubra os projetos de pesquisa realizados por nossos pesquisadores.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6 ">
               <a
