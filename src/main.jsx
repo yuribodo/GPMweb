@@ -7,11 +7,11 @@ import {
 import App from './App.jsx'
 import './index.css'
 
-import Equipes from './Components/Equipes/Equipes.jsx';
-import Noticias from './Components/Noticias/Noticias.jsx';
-import Suporte from './Components/Suporte/Suporte.jsx';
-import Projetos from './Components/Projetos/Projetos.jsx';
-import ErrorPage from './Error/Error2.jsx';
+import Equipes from './Pages/Equipes/Equipes.jsx';
+import Noticias from './Pages/Noticias/Noticias.jsx';
+import Suporte from './Pages/Suporte/Suporte.jsx';
+import Projetos from './Pages/Projetos/Projetos.jsx';
+import ErrorPage from './Pages/Error/Error2.jsx';
 
 const router = createBrowserRouter([
   {
