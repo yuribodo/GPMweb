@@ -1,5 +1,7 @@
 import React from 'react';
 import Navbar from '../../Components/Navbar';
+import Footer from '../../Components/Footer';
+
 
 const Suporte = () => {
   return (
@@ -77,6 +79,8 @@ const Suporte = () => {
           </div>
         </section>
       </main>
+
+      <Footer/>
     </div>
   );
 };
