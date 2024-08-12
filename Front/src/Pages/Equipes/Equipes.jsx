@@ -6,7 +6,7 @@ const Equipes = () => {
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
 
-      <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12">
+      <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
         <section className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900">Nossa Equipe</h1>
           <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
