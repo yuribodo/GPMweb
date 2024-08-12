@@ -4,10 +4,10 @@ import Navbar from '../../Components/Navbar';
 
 const Projetos = () => {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
       
-      <main className="px-4 sm:px-8 md:px-12 lg:px-16 py-12">
+      <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12">
         <section className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900">Projetos de Pesquisa</h1>
           <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
