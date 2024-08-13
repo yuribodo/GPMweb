@@ -1,9 +1,9 @@
-// Projetos.js
 import React, { useState } from 'react';
 import ProjetoCard from './ProjetoCard';
 import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
 import SearchBar from '../../Components/SearchBar'; 
+
 
 const Projetos = () => {
   const [filteredProjects, setFilteredProjects] = useState([]);
