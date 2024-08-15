@@ -12,3 +12,48 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Discentes {
+  id             Int      @id @default(autoincrement())
+  matricula      Int      @unique
+  nome           String
+  cpf            String
+  lates          String
+  date_born      DateTime
+  projetoId      Int      
+  projeto        Projeto  @relation(fields: [projetoId], references: [id])
+  tamanho_camisa String
+  contato        String
+  bolsista       Boolean
+}
+
+model Doscentes {
+  id        Int       @id @default(autoincrement())
+  siape     Int       @unique
+  nome      String
+  projetos  Projeto[] 
+  email     String    @unique
+  contato   String
+}
+
+model Projeto {
+  id             Int         @id @default(autoincrement())
+  titulo_projeto String
+  edital         String
+  area           String
+  objetivo       String
+  metas          String
+  doscentes      Doscentes[] 
+  noticias       Noticia[]   
+  discentes      Discentes[] 
+}
+
+model Noticia {
+  id        Int     @id @default(autoincrement())
+  titulo    String
+  tipo      String
+  link      String
+  projetoId Int    
+  projeto   Projeto @relation(fields: [projetoId], references: [id])
+}
+
