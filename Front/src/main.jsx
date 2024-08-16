@@ -12,6 +12,7 @@ import Noticias from './Pages/Noticias/Noticias.jsx';
 import Suporte from './Pages/Suporte/Suporte.jsx';
 import Projetos from './Pages/Projetos/Projetos.jsx';
 import ErrorPage from './Pages/Error/Error2.jsx';
+import SaibaMais from './Pages/Projetos/SaibaMais/SaibaMais.jsx';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
     path: "/suporte",
     element: <Suporte/>,
   },
+  {
+    path: "/projetos/saiba-mais",
+    element: <SaibaMais/>,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
