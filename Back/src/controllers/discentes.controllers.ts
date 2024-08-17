@@ -81,3 +81,19 @@ export const deleteDiscente = async (req: Request, res: Response) => {
       res.status(500).json({ error: 'Failed to delete discente' });
   }
 };
+
+export const getDiscentesByProjetoId = async (req: Request, res: Response) => {
+    const { projetoId } = req.params;
+    try {
+        const discentes = await prisma.discentes.findMany({
+            where: { projetoId: Number(projetoId) },
+        });
+        if (discentes.length > 0) {
+            res.json(discentes);
+        } else {
+            res.status(404).json({ error: 'No discentes found for the given project ID' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to retrieve discentes' });
+    }
+  };
