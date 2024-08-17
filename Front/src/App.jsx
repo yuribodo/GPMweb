@@ -16,7 +16,7 @@ function App() {
         >
           <h2 className="text-3xl font-semibold mb-4">Sobre o GPmecatronica</h2>
           <p className="max-w-2xl mx-auto text-lg text-gray-700">
-            O GPmecatronica é um grupo de pesquisa dedicado ao desenvolvimento e inovação em sistemas mecatrônicos. Com foco em robótica, automação, e inteligência artificial, o grupo busca soluções avançadas para desafios tecnológicos, promovendo a integração entre as áreas de mecânica, eletrônica e computação.
+            O GPMecatronica é um grupo de pesquisa dedicado ao desenvolvimento e inovação em sistemas mecatrônicos. Com foco em robótica, automação, e inteligência artificial, o grupo busca soluções avançadas para desafios tecnológicos, promovendo a integração entre as áreas de mecânica, eletrônica e computação.
           </p>
         </motion.section>
 
