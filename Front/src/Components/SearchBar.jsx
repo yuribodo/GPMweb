@@ -1,6 +1,5 @@
-// SearchBar.js
 import React, { useState } from 'react';
-import { FaSearch } from 'react-icons/fa'; // Importando o ícone da lupa
+import { FaSearch } from 'react-icons/fa';
 
 const SearchBar = ({ placeholder, onSearch }) => {
   const [query, setQuery] = useState('');

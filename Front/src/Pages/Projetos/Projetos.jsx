@@ -14,6 +14,7 @@ const Projetos = () => {
       try {
         const response = await axios.get('http://localhost:8080/projetos');
         setProjects(response.data);
+        setFilteredProjects(response.data); // Inicializa com todos os projetos
       } catch (error) {
         console.error('Erro ao buscar projetos:', error);
       }
@@ -42,18 +43,23 @@ const Projetos = () => {
           </p>
         </section>
 
-        
+        {/* Barra de Pesquisa */}
         <SearchBar placeholder="Buscar projetos..." onSearch={handleSearch} />
 
+        {/* Exibição dos Projetos */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {(filteredProjects.length > 0 ? filteredProjects : projects).map((project, index) => (
-            <ProjetoCard 
-              key={index} 
-              id={project.id} 
-              title={project.titulo_projeto} 
-              description={project.objetivo} 
-            />
-          ))}
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map((project) => (
+              <ProjetoCard 
+                key={project.id} 
+                id={project.id} 
+                title={project.titulo_projeto} 
+                description={project.objetivo} 
+              />
+            ))
+          ) : (
+            <p className="text-center text-gray-600">Nenhum projeto encontrado.</p>
+          )}
         </section>
 
         <section className="mt-16 text-center">

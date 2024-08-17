@@ -12,7 +12,7 @@ const Equipes = () => {
         <section className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900">Nossa Equipe</h1>
           <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            Conheça os profissionais que fazem parte do grupo GPmecatronica. Nossa equipe é formada por especialistas dedicados à pesquisa e inovação.
+            Conheça os profissionais que fazem parte do grupo GPMecatronica. Nossa equipe é formada por especialistas dedicados à pesquisa e inovação.
           </p>
         </section>
 
