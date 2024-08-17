@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ProjetoCard from './ProjetoCard';
 import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
-import SearchBar from '../../Components/SearchBar'; 
-
+import SearchBar from '../../Components/SearchBar';
 
 const Projetos = () => {
+  const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
-  const [projects] = useState([
-    { title: 'Projeto 1', description: 'Descrição breve do Projeto 1.' },
-    { title: 'Projeto 2', description: 'Descrição breve do Projeto 2.' },
-    { title: 'Projeto 3', description: 'Descrição breve do Projeto 3.' },
-    { title: 'Projeto 4', description: 'Descrição breve do Projeto 4.' },
-  ]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/projetos');
+        setProjects(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar projetos:', error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   const handleSearch = (query) => {
     const filtered = projects.filter((project) =>
-      project.title.toLowerCase().includes(query.toLowerCase())
+      project.titulo_projeto.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredProjects(filtered);
   };
@@ -34,12 +42,17 @@ const Projetos = () => {
           </p>
         </section>
 
-        {/* Barra de Pesquisa */}
+        
         <SearchBar placeholder="Buscar projetos..." onSearch={handleSearch} />
 
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {(filteredProjects.length > 0 ? filteredProjects : projects).map((project, index) => (
-            <ProjetoCard key={index} title={project.title} description={project.description} />
+            <ProjetoCard 
+              key={index} 
+              id={project.id} 
+              title={project.titulo_projeto} 
+              description={project.objetivo} 
+            />
           ))}
         </section>
 

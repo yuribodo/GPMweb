@@ -37,7 +37,7 @@ const router = createBrowserRouter([
     element: <Suporte/>,
   },
   {
-    path: "/projetos/saiba-mais",
+    path: "/projetos/:id",
     element: <SaibaMais/>,
   }
 ]);
