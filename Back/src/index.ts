@@ -13,10 +13,10 @@ app.use(cors());
 
 app.use(express.json())
 
-app.use('/api/discentes', discentesRoutes);
-app.use('/api/doscentes', doscentesRoutes);
-app.use('/api/projetos', projetoRoutes);
-app.use('/api/noticias', noticiaRoutes);
+app.use('/discentes', discentesRoutes);
+app.use('/doscentes', doscentesRoutes);
+app.use('/projetos', projetoRoutes);
+app.use('/noticias', noticiaRoutes);
 
 app.get('/ping', (req, res) => {
     res.json({message: "pong"}).status(200)
