@@ -7,13 +7,13 @@ import { useParams } from 'react-router-dom';
 const api = import.meta.env.VITE_API_LINK;
 
 const Membros = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [membros, setMembros] = useState([]);
 
   useEffect(() => {
     const fetchMembros = async () => {
       try {
-        const response = await axios.get(`${api}/discentes/projeto/${id}`); 
+        const response = await axios.get(`${api}/discentes/projeto/${id}`);
         setMembros(response.data);
       } catch (error) {
         console.error('Erro ao buscar membros:', error);
@@ -35,21 +35,37 @@ const Membros = () => {
           </p>
         </section>
 
-        <section className=" flex justify-center">
-          <div className="flex space-x-10">
-            {membros.map((membro) => (
-              <div key={membro.id} className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-                <div className="p-6">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">{membro.nome}</h2>
-                  <p className="text-gray-600 mb-2">Matrícula: {membro.matricula}</p>
-                  <p className="text-gray-600 mb-2">Camisa: {membro.tamanho_camisa}</p>
-                  <p className="text-gray-600 mb-2">Contato: <a href={`tel:${membro.contato}`} className="text-blue-600 hover:underline">{membro.contato}</a></p>
-                  <p className="text-gray-600 mb-2">Lattes: <a href={membro.lates} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Perfil Lattes</a></p>
-                  <p className="text-gray-600 mb-2">Bolsista: {membro.bolsista ? 'Sim' : 'Não'}</p>
-                </div>
+        <section className="flex flex-col md:flex-row md:flex-wrap justify-center gap-6">
+          {membros.map((membro) => (
+            <div
+              key={membro.id}
+              className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 w-full md:w-80"
+            >
+              <div className="p-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">{membro.nome}</h2>
+                <p className="text-gray-600 mb-2">Matrícula: {membro.matricula}</p>
+                <p className="text-gray-600 mb-2">Camisa: {membro.tamanho_camisa}</p>
+                <p className="text-gray-600 mb-2">
+                  Contato:{' '}
+                  <a href={`tel:${membro.contato}`} className="text-blue-600 hover:underline">
+                    {membro.contato}
+                  </a>
+                </p>
+                <p className="text-gray-600 mb-2">
+                  Lattes:{' '}
+                  <a
+                    href={membro.lates}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
+                    Perfil Lattes
+                  </a>
+                </p>
+                <p className="text-gray-600 mb-2">Bolsista: {membro.bolsista ? 'Sim' : 'Não'}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </section>
       </main>
 

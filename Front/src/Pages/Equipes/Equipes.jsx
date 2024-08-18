@@ -28,9 +28,9 @@ const Equipes = () => {
 
       <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
         <section className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900">Nossa Equipe</h1>
+          <h1 className="text-4xl font-bold text-gray-900">Nossas Equipes</h1>
           <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            Conheça os projetos em que estamos trabalhando no grupo GPMecatronica. Nossa equipe está empenhada em pesquisa e inovação.
+            Conheça os projetos em que estamos trabalhando no grupo GPMecatronica. Nossas equipes estao empenhadas em pesquisa e inovação.
           </p>
         </section>
 
