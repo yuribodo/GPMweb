@@ -36,11 +36,20 @@ const SaibaMais = () => {
           
           {project.imagem && <img src={project.imagem} alt={project.titulo_projeto} className="h-full w-full object-cover"/>}
         </div>
-        <p className="mt-6 text-xl">
-          {project.objetivo}
+        <div className=' flex space-x-2 mt-8'>
+          <h3 className='text-xl font-semibold'>
+            Objetivo:
+          </h3>
+          <p className="text-xl">
+            {project.objetivo}
+          </p>
+        </div>
+        
+        <p className="text-lg font-medium text-gray-700 mb-2">
+            Edital: <span className="font-normal">{project.edital}</span>
         </p>
-        <p className="mt-4 text-lg text-gray-700">
-          {project.descricao}
+        <p className="text-lg font-medium text-gray-700 mb-2">
+            Área: <span className="font-normal">{project.area}</span>
         </p>
       </main>
       <Footer />
