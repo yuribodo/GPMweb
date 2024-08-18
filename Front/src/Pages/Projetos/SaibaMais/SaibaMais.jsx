@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import Navbar from '../../../Components/Navbar';
 import Footer from '../../../Components/Footer';
 
+const api = import.meta.env.VITE_API_LINK;
+
 const SaibaMais = () => {
   const { id } = useParams();
   const [project, setProject] = useState(null);
@@ -12,7 +14,7 @@ const SaibaMais = () => {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/projetos/${id}`);
+        const response = await axios.get(`${api}/projetos/${id}`);
         setProject(response.data);
       } catch (error) {
         console.error('Erro ao buscar detalhes do projeto:', error);

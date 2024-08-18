@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Ou outro método de roteamento que você está usando
+import { Link } from 'react-router-dom'; 
+
+const api = import.meta.env.VITE_API_LINK;
 
 const Equipes = () => {
   const [projetos, setProjetos] = useState([]);
@@ -10,7 +12,7 @@ const Equipes = () => {
   useEffect(() => {
     const fetchProjetos = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/projetos'); // Substitua pela URL real da sua API
+        const response = await axios.get(`${api}/projetos`); 
         setProjetos(response.data);
       } catch (error) {
         console.error('Erro ao buscar projetos:', error);

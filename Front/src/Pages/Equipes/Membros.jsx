@@ -4,14 +4,16 @@ import Footer from '../../Components/Footer';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+const api = import.meta.env.VITE_API_LINK;
+
 const Membros = () => {
-  const { id } = useParams(); // Obtém o ID do projeto da URL
+  const { id } = useParams(); 
   const [membros, setMembros] = useState([]);
 
   useEffect(() => {
     const fetchMembros = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/discentes/projeto/${id}`); // Substitua pela URL real da sua API
+        const response = await axios.get(`${api}/discentes/projeto/${id}`); 
         setMembros(response.data);
       } catch (error) {
         console.error('Erro ao buscar membros:', error);

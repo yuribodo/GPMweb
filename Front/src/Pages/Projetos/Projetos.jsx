@@ -6,6 +6,9 @@ import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
 import SearchBar from '../../Components/SearchBar';
 
+
+const api = import.meta.env.VITE_API_LINK;
+
 const Projetos = () => {
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
@@ -13,16 +16,16 @@ const Projetos = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/projetos');
+        const response = await axios.get(`${api}/projetos`);
         setProjects(response.data);
-        setFilteredProjects(response.data); // Inicializa com todos os projetos
+        setFilteredProjects(response.data);
       } catch (error) {
         console.error('Erro ao buscar projetos:', error);
       }
     };
 
     fetchProjects();
-  }, []);
+  }, [api]);
 
   const handleSearch = (query) => {
     const filtered = projects.filter((project) =>
@@ -34,7 +37,7 @@ const Projetos = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
         <motion.section
           className="text-center mb-12"
@@ -49,7 +52,6 @@ const Projetos = () => {
           </p>
         </motion.section>
 
-        
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -58,7 +60,6 @@ const Projetos = () => {
           <SearchBar placeholder="Buscar projetos..." onSearch={handleSearch} />
         </motion.div>
 
-        
         <motion.section
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial="hidden"
