@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import ProjetoCard from './ProjetoCard';
 import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
@@ -35,19 +36,43 @@ const Projetos = () => {
       <Navbar />
       
       <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
-        <section className="text-center mb-12">
+        <motion.section
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <h1 className="text-4xl font-bold text-gray-900">Projetos de Pesquisa</h1>
           <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
             Explore os projetos de pesquisa desenvolvidos pelo grupo de pesquisa GPmecatronica. 
             Nosso foco está em inovação e tecnologia, buscando soluções para os desafios da atualidade.
           </p>
-        </section>
+        </motion.section>
 
-        {/* Barra de Pesquisa */}
-        <SearchBar placeholder="Buscar projetos..." onSearch={handleSearch} />
+        
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <SearchBar placeholder="Buscar projetos..." onSearch={handleSearch} />
+        </motion.div>
 
-        {/* Exibição dos Projetos */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <motion.section
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.2
+              }
+            }
+          }}
+        >
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project) => (
               <ProjetoCard 
@@ -60,16 +85,21 @@ const Projetos = () => {
           ) : (
             <p className="text-center text-gray-600">Nenhum projeto encontrado.</p>
           )}
-        </section>
+        </motion.section>
 
-        <section className="mt-16 text-center">
+        <motion.section
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
           <h2 className="text-3xl font-semibold text-gray-900">Sobre o Grupo GPmecatronica</h2>
           <p className="mt-4 text-gray-600 max-w-3xl mx-auto">
             O grupo GPmecatronica é composto por pesquisadores dedicados a promover avanços em várias áreas 
             da mecatrônica. Trabalhamos em colaboração com a indústria e academia para desenvolver projetos 
             que impulsionam a inovação e a tecnologia.
           </p>
-        </section>
+        </motion.section>
       </main>
 
       <Footer />
