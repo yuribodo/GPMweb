@@ -24,6 +24,7 @@ This application was conceived as a blueprint for rapid full-stack development, 
 - **React**: A JavaScript library for building user interfaces. It allows us to create reusable UI components.
 - **TailwindCSS**: A utility-first CSS framework packed with classes like `flex`, `pt-4`, `text-center` and more to style your websites without leaving your HTML.
 - **React-Router-Dom**: A routing library for React, enabling navigation among views.
+- **Framer Motion**: A library for adding animations to React components.
 
 
 ### Backend
