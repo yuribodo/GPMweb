@@ -1,8 +1,28 @@
+import React from 'react';
 import Footer from './Components/Footer';
 import Hero from './Pages/Hero/Hero';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 function App() {
+  const { ref: aboutRef, inView: aboutInView } = useInView({ triggerOnce: true });
+  const { ref: projectsRef, inView: projectsInView } = useInView({ triggerOnce: true });
+
+  const aboutControls = useAnimation();
+  const projectsControls = useAnimation();
+
+  React.useEffect(() => {
+    if (aboutInView) {
+      aboutControls.start({ opacity: 1, y: 0 });
+    }
+  }, [aboutInView, aboutControls]);
+
+  React.useEffect(() => {
+    if (projectsInView) {
+      projectsControls.start({ opacity: 1, y: 0 });
+    }
+  }, [projectsInView, projectsControls]);
+
   return (
     <>
       <div>
@@ -10,8 +30,9 @@ function App() {
         <motion.section
           id="about"
           className="py-10 bg-gray-100 text-center"
+          ref={aboutRef}
           initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={aboutControls}
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-3xl font-semibold mb-4">Sobre o GPmecatronica</h2>
@@ -23,8 +44,9 @@ function App() {
         <motion.section
           id="projects"
           className="py-10 bg-white text-center"
+          ref={projectsRef}
           initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={projectsControls}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <h2 className="text-3xl font-semibold mb-8">Projetos Recentes</h2>
@@ -34,7 +56,7 @@ function App() {
               className="bg-gray-200 p-6 rounded-lg shadow-md"
               whileHover={{ scale: 1.05 }}
               initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={projectsControls}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <h3 className="text-2xl font-bold mb-4">Projeto A</h3>
@@ -46,7 +68,7 @@ function App() {
               className="bg-gray-200 p-6 rounded-lg shadow-md"
               whileHover={{ scale: 1.05 }}
               initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={projectsControls}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               <h3 className="text-2xl font-bold mb-4">Projeto B</h3>
@@ -58,7 +80,7 @@ function App() {
               className="bg-gray-200 p-6 rounded-lg shadow-md"
               whileHover={{ scale: 1.05 }}
               initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={projectsControls}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
               <h3 className="text-2xl font-bold mb-4">Projeto C</h3>
@@ -68,7 +90,7 @@ function App() {
             </motion.div>
           </div>
         </motion.section>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
