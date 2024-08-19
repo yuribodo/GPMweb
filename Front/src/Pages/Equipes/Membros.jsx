@@ -10,6 +10,8 @@ const api = import.meta.env.VITE_API_LINK;
 const Membros = () => {
   const { id } = useParams();
   const [membros, setMembros] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMembros = async () => {
@@ -17,12 +19,43 @@ const Membros = () => {
         const response = await axios.get(`${api}/discentes/projeto/${id}`);
         setMembros(response.data);
       } catch (error) {
-        console.error('Erro ao buscar membros:', error);
+        setError('Erro ao buscar membros.');
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchMembros();
   }, [id]);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-100">
+        <Navbar />
+        <main className="flex-grow flex justify-center items-center">
+          <motion.div
+            className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 1 }}
+          />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-100">
+        <Navbar />
+        <main className="flex-grow flex justify-center items-center">
+          <p className="text-red-600">{error}</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
