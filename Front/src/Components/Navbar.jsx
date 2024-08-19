@@ -78,7 +78,7 @@ const Navbar = () => {
                 <span className="sr-only">Your Company</span>
                 <img
                   className="h-8 w-auto"
-                  src=""
+                  src={logo}
                   alt="Logo"
                 />
               </Link>
@@ -112,13 +112,6 @@ const Navbar = () => {
                   ))}
                 </div>
                 <div className="py-6">
-                  <Link
-                    to="/login"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Log in
-                  </Link>
                 </div>
               </div>
             </div>
