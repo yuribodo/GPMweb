@@ -5,13 +5,14 @@ import ProjetoCard from './ProjetoCard';
 import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
 import SearchBar from '../../Components/SearchBar';
-
+import { ClipLoader } from 'react-spinners'; 
 
 const api = import.meta.env.VITE_API_LINK;
 
 const Projetos = () => {
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -19,8 +20,10 @@ const Projetos = () => {
         const response = await axios.get(`${api}/projetos`);
         setProjects(response.data);
         setFilteredProjects(response.data);
+        setLoading(false); 
       } catch (error) {
         console.error('Erro ao buscar projetos:', error);
+        setLoading(false); 
       }
     };
 
@@ -74,17 +77,23 @@ const Projetos = () => {
             }
           }}
         >
-          {filteredProjects.length > 0 ? (
-            filteredProjects.map((project) => (
-              <ProjetoCard 
-                key={project.id} 
-                id={project.id} 
-                title={project.titulo_projeto} 
-                description={project.objetivo} 
-              />
-            ))
+          {loading ? (
+            <div className="flex justify-center items-center w-full">
+              <ClipLoader color="#4A90E2" size={50} /> 
+            </div>
           ) : (
-            <p className="text-center text-gray-600">Nenhum projeto encontrado.</p>
+            filteredProjects.length > 0 ? (
+              filteredProjects.map((project) => (
+                <ProjetoCard 
+                  key={project.id} 
+                  id={project.id} 
+                  title={project.titulo_projeto} 
+                  description={project.objetivo} 
+                />
+              ))
+            ) : (
+              <p className="text-center text-gray-600">Nenhum projeto encontrado.</p>
+            )
           )}
         </motion.section>
 

@@ -44,8 +44,13 @@ const Noticias = () => {
     return (
       <div className="flex flex-col min-h-screen bg-gray-50">
         <Navbar />
-        <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
-          <p className="text-center text-gray-600">Carregando...</p>
+        <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16 flex justify-center items-center">
+          <motion.div
+            className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 1 }}
+          />
         </main>
         <Footer />
       </div>
@@ -108,7 +113,6 @@ const Noticias = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             >
-              {/*<img src="/path-to-image.jpg" alt={noticia.titulo} className="w-full h-48 object-cover"/> */}
               <div className="p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">{noticia.titulo}</h2>
                 <p className="text-gray-600">{noticia.resumo}</p>

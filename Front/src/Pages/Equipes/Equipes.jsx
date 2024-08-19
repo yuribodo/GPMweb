@@ -9,6 +9,8 @@ const api = import.meta.env.VITE_API_LINK;
 
 const Equipes = () => {
   const [projetos, setProjetos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProjetos = async () => {
@@ -16,12 +18,43 @@ const Equipes = () => {
         const response = await axios.get(`${api}/projetos`);
         setProjetos(response.data);
       } catch (error) {
-        console.error('Erro ao buscar projetos:', error);
+        setError('Não foi possível carregar os projetos.');
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProjetos();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-50">
+        <Navbar />
+        <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16 flex justify-center items-center">
+          <motion.div
+            className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 1 }}
+          />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col min-h-screen bg-gray-50">
+        <Navbar />
+        <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
+          <p className="text-center text-red-600">{error}</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
@@ -36,7 +69,7 @@ const Equipes = () => {
         >
           <h1 className="text-4xl font-bold text-gray-900">Nossas Equipes</h1>
           <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            Conheça os projetos em que estamos trabalhando no grupo GPMecatronica. Nossas equipes estao empenhadas em pesquisa e inovação.
+            Conheça os projetos em que estamos trabalhando no grupo GPMecatronica. Nossas equipes estão empenhadas em pesquisa e inovação.
           </p>
         </motion.section>
 
@@ -80,7 +113,7 @@ const Equipes = () => {
         </motion.section>
       </main>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }
