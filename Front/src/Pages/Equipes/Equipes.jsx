@@ -54,7 +54,7 @@ const Equipes = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 0.1 * projetos.indexOf(projeto) }}
             >
-              <img src={projeto.image || "/default-image.jpg"} alt={projeto.titulo_projeto} className="w-full h-48 object-cover"/>
+              {/* <img src={projeto.image || "/default-image.jpg"} alt={projeto.titulo_projeto} className="w-full h-48 object-cover"/>*/}
               <div className="p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">{projeto.titulo_projeto}</h2>
                 <p className="text-gray-600">Edital: {projeto.edital}</p>
