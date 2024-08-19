@@ -3,11 +3,13 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
+import SearchBar from '../../Components/SearchBar';
 
 const api = import.meta.env.VITE_API_LINK;
 
 const Noticias = () => {
   const [noticias, setNoticias] = useState([]);
+  const [filteredNoticias, setFilteredNoticias] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -16,6 +18,7 @@ const Noticias = () => {
       try {
         const response = await axios.get(`${api}/noticias`);
         setNoticias(response.data);
+        setFilteredNoticias(response.data);
       } catch (err) {
         setError('Não foi possível carregar as notícias.');
       } finally {
@@ -25,6 +28,17 @@ const Noticias = () => {
 
     fetchNoticias();
   }, []);
+
+  const handleSearch = (query) => {
+    if (query) {
+      const filtered = noticias.filter((noticia) =>
+        noticia.titulo.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredNoticias(filtered);
+    } else {
+      setFilteredNoticias(noticias);
+    }
+  };
 
   if (loading) {
     return (
@@ -68,6 +82,11 @@ const Noticias = () => {
           </p>
         </motion.section>
 
+        <SearchBar 
+          placeholder="Buscar notícias..."
+          onSearch={handleSearch}
+        />
+
         <motion.section 
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial="hidden"
@@ -81,7 +100,7 @@ const Noticias = () => {
             },
           }}
         >
-          {noticias.map((noticia) => (
+          {filteredNoticias.map((noticia) => (
             <motion.article 
               key={noticia.id} 
               className="bg-white shadow-lg rounded-lg overflow-hidden"
@@ -89,7 +108,7 @@ const Noticias = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             >
-              {/*<img src="/path-to-image.jpg" alt={noticia.titulo} className="w-full h-48 object-cover"/>*/}
+              {/*<img src="/path-to-image.jpg" alt={noticia.titulo} className="w-full h-48 object-cover"/> */}
               <div className="p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">{noticia.titulo}</h2>
                 <p className="text-gray-600">{noticia.resumo}</p>
@@ -115,6 +134,6 @@ const Noticias = () => {
       <Footer />
     </div>
   );
-}
+};
 
 export default Noticias;
