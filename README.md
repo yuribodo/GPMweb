@@ -9,8 +9,8 @@ Welcome to the repository for my full-stack template, integrating a React front-
   - [Frontend](#frontend)
   - [Backend](#backend)
 - [Installation](#installation)
+- [Environment Variables](#environment-variables)
 - [Running the Application](#running-the-application)
-- [Conclusion](#conclusion)
 
 ## Introduction
 
@@ -56,14 +56,35 @@ Before you start, ensure you have `node` and `npm` installed on your machine.
    - For Frontend:
    
      ```bash
-     cd frontend && npm install
+     cd Front && npm install
      ```
 
    - For Backend:
 
      ```bash
-     cd backend && npm install
+     cd Back && npm install
      ```
+
+## Environment Variables
+
+Both the frontend and backend applications require environment variables to be configured. Create the following .env files with the necessary settings:
+
+Frontend .env: Place this file in the Front directory.
+
+- **.env**
+```bash
+   VITE_API_LINK=http://localhost:8080
+  ```
+
+Backend .env: Place this file in the Back directory.
+
+- **.env**
+ ```bash
+   DATABASE_URL={your postgress database}
+  ```
+
+
+Make sure to replace placeholders with your actual configuration values.
 
 ## Running the Application
 
@@ -78,26 +99,14 @@ Before you start, ensure you have `node` and `npm` installed on your machine.
 - **To run the backend**:
 
   ```bash
-  npm run start-backend
+  npm run dev
   ```
 
-  This initializes the Express server, typically on `http://localhost:3000`.
+  This initializes the Express server, typically on `http://localhost:8080`.
 
-- **To run both simultaneously**:
-
-  ```bash
-  npm run start
-  ```
-
-  This will invoke `concurrently` to start both the front and back ends.
 
 Ensure that the frontend and backend are configured to run on separate ports to avoid conflicts.
 
-## Conclusion
-
-This full-stack application setup is intended to accelerate the development process by providing a cohesive blend of some of the best technologies in web development today. Whether you're looking to create a small prototype or build a large-scale application, this repository provides a solid foundation. Happy coding!
-
----
 
 If you find any bugs or have a feature request, please open an issue on [GitHub](https://github.com/yuribodo/GPMweb/issues).
 
