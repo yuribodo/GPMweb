@@ -3,6 +3,7 @@ import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import logo from '../../assets/logo.png'
 
 const Navbar = () => {
   const navigation = [
@@ -28,7 +29,7 @@ const Navbar = () => {
               <span className="sr-only">Your Company</span>
               <img
                 className="h-8 w-auto"
-                src=""
+                src={logo}
                 alt="logo"
               />
             </Link>
