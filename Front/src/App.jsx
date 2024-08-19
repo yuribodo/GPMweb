@@ -51,7 +51,7 @@ function App() {
         >
           <h2 className="text-3xl font-semibold mb-8">Projetos Recentes</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* Exemplo de card de projeto */}
+            
             <motion.div
               className="bg-gray-200 p-6 rounded-lg shadow-md"
               whileHover={{ scale: 1.05 }}
