@@ -8,7 +8,7 @@ const Suporte = () => {
       <Navbar />
       <main className="mt-16 p-4 md:p-8 bg-gray-50 min-h-screen">
         <section className="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-lg shadow-md">
-          <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-indigo-600">Suporte</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-green-600">Suporte</h1>
 
           <div className="mb-12 md:mb-16">
             <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-800">Perguntas Frequentes</h2>
@@ -37,7 +37,7 @@ const Suporte = () => {
                   type="text"
                   id="name"
                   name="name"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
                   placeholder="Seu nome"
                   required
                 />
@@ -48,7 +48,7 @@ const Suporte = () => {
                   type="email"
                   id="email"
                   name="email"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
                   placeholder="seuemail@exemplo.com"
                   required
                 />
@@ -59,7 +59,7 @@ const Suporte = () => {
                   id="message"
                   name="message"
                   rows="4"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
                   placeholder="Escreva sua mensagem aqui..."
                   required
                 ></textarea>
@@ -67,7 +67,7 @@ const Suporte = () => {
               <div>
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                 >
                   Enviar
                 </button>

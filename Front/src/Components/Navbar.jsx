@@ -54,7 +54,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Link to={item.href} className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600">
+                <Link to={item.href} className="text-sm font-semibold leading-6 text-gray-900 hover:text-green-600">
                   {item.name}
                 </Link>
               </motion.div>
@@ -67,7 +67,7 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Link to="/login" className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600">
+            <Link to="/login" className="text-sm font-semibold leading-6 text-gray-900 hover:text-green-600">
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>
           </motion.div>

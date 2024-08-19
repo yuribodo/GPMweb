@@ -17,7 +17,7 @@ const ProjetoCard = ({ id, title, description }) => {
         <p className="mt-4 text-gray-600">{description}</p>
         <Link to={`/projetos/${id}`}>
           <motion.button
-            className="mt-6 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+            className="mt-6 bg-green-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
             whileHover={{ scale: 1.1 }}
           >
             Saiba mais

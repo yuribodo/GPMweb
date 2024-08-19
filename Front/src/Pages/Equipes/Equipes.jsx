@@ -29,7 +29,36 @@ const Equipes = () => {
 
   if (loading) {
     return (
-      <div className="flex flex-col min-h-screen bg-gray-50">
+      <div className="flex flex-col min-h-screen bg-gray-50 relative">
+        
+        <div
+          className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-2xl"
+          aria-hidden="true"
+        >
+          <div
+            className="absolute inset-x-0 -top-1/2 -z-10 transform-gpu overflow-hidden blur-2xl"
+            aria-hidden="true"
+          >
+            <div
+              className="relative left-[calc(50%-15rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-green-500 to-green-700 opacity-50 sm:left-[calc(50%-30rem)] sm:w-[92.1875rem]"
+              style={{
+                clipPath: 'polygon(0% 0%, 50% 0%, 100% 50%, 80% 100%, 0% 100%)',
+              }}
+            />
+          </div>
+          <div
+            className="absolute inset-x-0 top-[calc(100%-10rem)] -z-10 transform-gpu overflow-hidden blur-3xl"
+            aria-hidden="true"
+          >
+            <div
+              className="relative left-[calc(50%+10rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[15deg] bg-gradient-to-tr from-green-600 to-green-800 opacity-70 sm:left-[calc(50%+20rem)] sm:w-[72.1875rem]"
+              style={{
+                clipPath: 'polygon(100% 0%, 100% 100%, 50% 100%, 0% 50%, 0% 0%)',
+              }}
+            />
+          </div>
+        </div>
+
         <Navbar />
         <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16 flex justify-center items-center">
           <motion.div
@@ -46,7 +75,36 @@ const Equipes = () => {
 
   if (error) {
     return (
-      <div className="flex flex-col min-h-screen bg-gray-50">
+      <div className="flex flex-col min-h-screen bg-gray-50 relative">
+        
+        <div
+          className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-2xl"
+          aria-hidden="true"
+        >
+          <div
+            className="absolute inset-x-0 -top-1/2 -z-10 transform-gpu overflow-hidden blur-2xl"
+            aria-hidden="true"
+          >
+            <div
+              className="relative left-[calc(50%-15rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-green-500 to-green-700 opacity-50 sm:left-[calc(50%-30rem)] sm:w-[92.1875rem]"
+              style={{
+                clipPath: 'polygon(0% 0%, 50% 0%, 100% 50%, 80% 100%, 0% 100%)',
+              }}
+            />
+          </div>
+          <div
+            className="absolute inset-x-0 top-[calc(100%-10rem)] -z-10 transform-gpu overflow-hidden blur-3xl"
+            aria-hidden="true"
+          >
+            <div
+              className="relative left-[calc(50%+10rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[15deg] bg-gradient-to-tr from-green-600 to-green-800 opacity-70 sm:left-[calc(50%+20rem)] sm:w-[72.1875rem]"
+              style={{
+                clipPath: 'polygon(100% 0%, 100% 100%, 50% 100%, 0% 50%, 0% 0%)',
+              }}
+            />
+          </div>
+        </div>
+
         <Navbar />
         <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
           <p className="text-center text-red-600">{error}</p>
@@ -57,7 +115,36 @@ const Equipes = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen  relative">
+      
+      <div
+        className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-2xl"
+        aria-hidden="true"
+      >
+        <div
+          className="absolute inset-x-0 -top-1/2 -z-10 transform-gpu overflow-hidden blur-2xl"
+          aria-hidden="true"
+        >
+          <div
+            className="relative left-[calc(50%-15rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-green-500 to-green-700 opacity-50 sm:left-[calc(50%-30rem)] sm:w-[92.1875rem]"
+            style={{
+              clipPath: 'polygon(0% 0%, 50% 0%, 100% 50%, 80% 100%, 0% 100%)',
+            }}
+          />
+        </div>
+        <div
+          className="absolute inset-x-0 top-[calc(100%-10rem)] -z-10 transform-gpu overflow-hidden blur-3xl"
+          aria-hidden="true"
+        >
+          <div
+            className="relative left-[calc(50%+10rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[15deg] bg-gradient-to-tr from-green-600 to-green-800 opacity-70 sm:left-[calc(50%+20rem)] sm:w-[72.1875rem]"
+            style={{
+              clipPath: 'polygon(100% 0%, 100% 100%, 50% 100%, 0% 50%, 0% 0%)',
+            }}
+          />
+        </div>
+      </div>
+
       <Navbar />
 
       <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
@@ -94,7 +181,7 @@ const Equipes = () => {
                 <p className="text-gray-600 mt-2">Área: {projeto.area}</p>
                 <p className="mt-4 text-gray-600">{projeto.objetivo}</p>
                 <p className="mt-2 text-gray-600">{projeto.metas}</p>
-                <Link to={`/membros/${projeto.id}`} className="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Ver Membros</Link>
+                <Link to={`/membros/${projeto.id}`} className="mt-4 inline-block px-4 py-2 bg-green-600 text-white rounded-lg">Ver Membros</Link>
               </div>
             </motion.div>
           ))}

@@ -38,10 +38,39 @@ const Projetos = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="relative flex flex-col min-h-screen overflow-hidden">
+      
+      <div
+        className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-2xl"
+        aria-hidden="true"
+      >
+        <div
+          className="absolute inset-x-0 -top-1/2 -z-10 transform-gpu overflow-hidden blur-2xl"
+          aria-hidden="true"
+        >
+          <div
+            className="relative left-[calc(50%-15rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-green-500 to-green-700 opacity-50 sm:left-[calc(50%-30rem)] sm:w-[92.1875rem]"
+            style={{
+              clipPath: 'polygon(0% 0%, 50% 0%, 100% 50%, 80% 100%, 0% 100%)',
+            }}
+          />
+        </div>
+        <div
+          className="absolute inset-x-0 top-[calc(100%-10rem)] -z-10 transform-gpu overflow-hidden blur-3xl"
+          aria-hidden="true"
+        >
+          <div
+            className="relative left-[calc(50%+10rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[15deg] bg-gradient-to-tr from-green-600 to-green-800 opacity-70 sm:left-[calc(50%+20rem)] sm:w-[72.1875rem]"
+            style={{
+              clipPath: 'polygon(100% 0%, 100% 100%, 50% 100%, 0% 50%, 0% 0%)',
+            }}
+          />
+        </div>
+      </div>
+
       <Navbar />
 
-      <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
+      <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16 relative">
         <motion.section
           className="text-center mb-12"
           initial={{ opacity: 0, y: -20 }}
@@ -49,8 +78,8 @@ const Projetos = () => {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-4xl font-bold text-gray-900">Projetos de Pesquisa</h1>
-          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            Explore os projetos de pesquisa desenvolvidos pelo grupo de pesquisa GPmecatronica. 
+          <p className="mt-4 text-gray-600 max-w-2xl mx-auto font-semibold">
+            Explore os projetos de pesquisa desenvolvidos pelo grupo de pesquisa GPMecatronica. 
             Nosso foco está em inovação e tecnologia, buscando soluções para os desafios da atualidade.
           </p>
         </motion.section>

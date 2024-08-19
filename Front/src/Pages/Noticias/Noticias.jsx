@@ -42,11 +42,20 @@ const Noticias = () => {
 
   if (loading) {
     return (
-      <div className="flex flex-col min-h-screen bg-gray-50">
+      <div className="flex flex-col min-h-screen bg-gradient-to-r from-green-100 via-green-200 to-green-300 relative overflow-hidden">
+        
+        <div className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-2xl" aria-hidden="true">
+          <div className="absolute inset-x-0 -top-1/2 -z-10 transform-gpu overflow-hidden blur-2xl">
+            <div className="relative left-[calc(50%-10rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[20deg] bg-gradient-to-tr from-green-200 to-green-400 opacity-50 sm:left-[calc(50%-20rem)] sm:w-[72.1875rem]" style={{ clipPath: 'polygon(0% 0%, 60% 0%, 100% 60%, 80% 100%, 0% 100%)' }} />
+          </div>
+          <div className="absolute inset-x-0 top-[calc(100%-10rem)] -z-10 transform-gpu overflow-hidden blur-3xl">
+            <div className="relative left-[calc(50%+10rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[15deg] bg-gradient-to-tr from-green-300 to-green-500 opacity-70 sm:left-[calc(50%+20rem)] sm:w-[72.1875rem]" style={{ clipPath: 'polygon(100% 0%, 100% 100%, 50% 100%, 0% 50%, 0% 0%)' }} />
+          </div>
+        </div>
         <Navbar />
         <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16 flex justify-center items-center">
           <motion.div
-            className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"
+            className="w-16 h-16 border-4 border-green-500 border-t-transparent border-solid rounded-full animate-spin"
             initial={{ rotate: 0 }}
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 1 }}
@@ -59,7 +68,16 @@ const Noticias = () => {
 
   if (error) {
     return (
-      <div className="flex flex-col min-h-screen bg-gray-50">
+      <div className="flex flex-col min-h-screen bg-gradient-to-r from-green-100 via-green-200 to-green-300 relative overflow-hidden">
+        
+        <div className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-2xl" aria-hidden="true">
+          <div className="absolute inset-x-0 -top-1/2 -z-10 transform-gpu overflow-hidden blur-2xl">
+            <div className="relative left-[calc(50%-10rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[20deg] bg-gradient-to-tr from-green-200 to-green-400 opacity-50 sm:left-[calc(50%-20rem)] sm:w-[72.1875rem]" style={{ clipPath: 'polygon(0% 0%, 60% 0%, 100% 60%, 80% 100%, 0% 100%)' }} />
+          </div>
+          <div className="absolute inset-x-0 top-[calc(100%-10rem)] -z-10 transform-gpu overflow-hidden blur-3xl">
+            <div className="relative left-[calc(50%+10rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[15deg] bg-gradient-to-tr from-green-300 to-green-500 opacity-70 sm:left-[calc(50%+20rem)] sm:w-[72.1875rem]" style={{ clipPath: 'polygon(100% 0%, 100% 100%, 50% 100%, 0% 50%, 0% 0%)' }} />
+          </div>
+        </div>
         <Navbar />
         <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
           <p className="text-center text-red-600">{error}</p>
@@ -70,7 +88,17 @@ const Noticias = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-gradient-to-r from-green-100 via-green-200 to-green-300 relative overflow-hidden">
+      
+      <div className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-2xl" aria-hidden="true">
+        <div className="absolute inset-x-0 -top-1/2 -z-10 transform-gpu overflow-hidden blur-2xl">
+          <div className="relative left-[calc(50%-10rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[20deg] bg-gradient-to-tr from-green-200 to-green-400 opacity-50 sm:left-[calc(50%-20rem)] sm:w-[72.1875rem]" style={{ clipPath: 'polygon(0% 0%, 60% 0%, 100% 60%, 80% 100%, 0% 100%)' }} />
+          </div>
+          <div className="absolute inset-x-0 top-[calc(100%-10rem)] -z-10 transform-gpu overflow-hidden blur-3xl">
+            <div className="relative left-[calc(50%+10rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[15deg] bg-gradient-to-tr from-green-300 to-green-500 opacity-70 sm:left-[calc(50%+20rem)] sm:w-[72.1875rem]" style={{ clipPath: 'polygon(100% 0%, 100% 100%, 50% 100%, 0% 50%, 0% 0%)' }} />
+          </div>
+        </div>
+
       <Navbar />
 
       <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
