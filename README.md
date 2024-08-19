@@ -1,6 +1,6 @@
 # My Full-Stack Template
 
-Welcome to the repository for my full-stack template, integrating a React front-end with a Node.js and Express back-end. This README provides a detailed explanation of the application, its components, and how to get started.
+Welcome to the repository for **GPMweb**
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@ Welcome to the repository for my full-stack template, integrating a React front-
 
 ## Introduction
 
-This application was conceived as a blueprint for rapid full-stack development, offering the seamless integration of a dynamic React front-end and a robust, scalable Node.js back-end. This amalgamation of technologies ensures that developers can focus on building features without the usual setup overhead.
+This application is dedicated to show project and members from **GPMecatronica**
 
 ## Technologies Used
 
