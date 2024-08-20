@@ -144,7 +144,7 @@ const Noticias = () => {
               <div className="p-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">{noticia.titulo}</h2>
                 <p className="text-gray-600">{noticia.resumo}</p>
-                <a href={noticia.link} className="text-blue-500 hover:underline mt-4 inline-block">Leia mais</a>
+                <a href="https://portal.ifro.edu.br/calama/noticias/" className="text-blue-500 hover:underline mt-4 inline-block">Leia mais</a>
               </div>
             </motion.article>
           ))}
