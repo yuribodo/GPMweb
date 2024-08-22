@@ -3,7 +3,7 @@ import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo.png';
 
 const Navbar = () => {
   const navigation = [
@@ -67,6 +67,12 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
+            <Link 
+              to="/login" 
+              className="text-sm font-semibold leading-6 text-gray-900 hover:text-green-600"
+            >
+              Login
+            </Link>
           </motion.div>
         </nav>
 
@@ -112,6 +118,13 @@ const Navbar = () => {
                   ))}
                 </div>
                 <div className="py-6">
+                  <Link 
+                    to="/login" 
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Login
+                  </Link>
                 </div>
               </div>
             </div>
