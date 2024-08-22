@@ -14,6 +14,8 @@ import Projetos from './Pages/Projetos/Projetos.jsx';
 import ErrorPage from './Pages/Error/Error2.jsx';
 import SaibaMais from './Pages/Projetos/SaibaMais/SaibaMais.jsx';
 import Membros from './Pages/Equipes/Membros.jsx';
+import Login from './Pages/Login/Login.jsx';
+import Signup from './Pages/Signup/Signup.jsx';
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
   {
     path: "/membros/:id",
     element: <Membros/>,
+  },
+  {
+    path: "/login",
+    element: <Login/>,
+  },
+  {
+    path: "/signup",
+    element: <Signup/>,
   }
 ]);
 
