@@ -16,6 +16,7 @@ import SaibaMais from './Pages/Projetos/SaibaMais/SaibaMais.jsx';
 import Membros from './Pages/Equipes/Membros.jsx';
 import Login from './Pages/Login/Login.jsx';
 import Signup from './Pages/Signup/Signup.jsx';
+import CreateProject from './Pages/CreateProject/CreateProject.jsx';
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup/>,
+  },
+  {
+    path: "/create-project",
+    element: <CreateProject/>,
   }
 ]);
 
