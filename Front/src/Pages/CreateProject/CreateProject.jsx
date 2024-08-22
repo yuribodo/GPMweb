@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const api = import.meta.env.VITE_API_LINK;
 
 const CreateProject = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +13,9 @@ const CreateProject = () => {
     metas: '',
   });
 
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -16,18 +23,14 @@ const CreateProject = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You would typically send formData to your backend here
-    console.log('Form submitted:', formData);
-    // Reset form after submission
-    setFormData({
-      titulo_projeto: '',
-      edital: '',
-      area: '',
-      objetivo: '',
-      metas: '',
-    });
+    try {
+      await axios.post(`${api}/projetos`, formData);
+      navigate('/projetos', { state: { message: 'Projeto criado com sucesso!' } });
+    } catch (err) {
+      setError('Failed to create projeto. Please try again.');
+    }
   };
 
   return (
@@ -35,6 +38,7 @@ const CreateProject = () => {
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-900">Create Project</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
+          {error && <p className="text-red-500">{error}</p>}
           <div>
             <label htmlFor="titulo_projeto" className="block text-sm font-medium text-gray-700">
               Project Title
