@@ -1,12 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if (email === 'admin@admin.com' && password === 'admin') {
+      navigate('/create-project');
+    } else {
+      setError('Invalid email or password');
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-900">Login</h2>
-        <form className="space-y-6">
+        
+        {error && <p className="text-sm text-red-500">{error}</p>}
+        
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email address
@@ -15,10 +34,13 @@ const Login = () => {
               id="email"
               name="email"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
               className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
             />
           </div>
+
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Password
@@ -27,10 +49,13 @@ const Login = () => {
               id="password"
               name="password"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
               className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
             />
           </div>
+
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
@@ -39,14 +64,14 @@ const Login = () => {
                 type="checkbox"
                 className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
               />
-              <label htmlFor="remember-me" className="block ml-2 text-sm text-gray-900">
+              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
                 Remember me
               </label>
             </div>
             <div className="text-sm">
-              <Link to="#" className="font-medium text-green-600 hover:text-green-500">
+              <a href="#" className="font-medium text-green-600 hover:text-green-500">
                 Forgot your password?
-              </Link>
+              </a>
             </div>
           </div>
           
@@ -57,12 +82,13 @@ const Login = () => {
             Sign in
           </button>
         </form>
+        
         <div className="text-center">
           <p className="text-sm text-gray-600">
             Don't have an account?{' '}
-            <Link to="/signup" className="font-medium text-green-600 hover:text-green-500">
+            <a href="/signup" className="font-medium text-green-600 hover:text-green-500">
               Sign Up
-            </Link>
+            </a>
           </p>
         </div>
       </div>
