@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 
 const api = import.meta.env.VITE_API_LINK;
 
@@ -34,14 +35,30 @@ const CreateProject = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+    <motion.div 
+      className="flex min-h-screen items-center justify-center bg-gray-100"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div 
+        className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md border border-green-500"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
         <h2 className="text-2xl font-bold text-center text-gray-900">Create Project</h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <motion.form 
+          onSubmit={handleSubmit} 
+          className="space-y-6"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           {error && <p className="text-red-500">{error}</p>}
           <div>
             <label htmlFor="titulo_projeto" className="block text-sm font-medium text-gray-700">
-              Project Title
+              Titulo do Projeto
             </label>
             <input
               id="titulo_projeto"
@@ -56,7 +73,7 @@ const CreateProject = () => {
 
           <div>
             <label htmlFor="edital" className="block text-sm font-medium text-gray-700">
-              Public Notice
+              Edital
             </label>
             <input
               id="edital"
@@ -112,15 +129,17 @@ const CreateProject = () => {
             />
           </div>
 
-          <button
+          <motion.button
             type="submit"
             className="w-full px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             Create Project
-          </button>
-        </form>
-      </div>
-    </div>
+          </motion.button>
+        </motion.form>
+      </motion.div>
+    </motion.div>
   );
 };
 
