@@ -1,4 +1,4 @@
-# My Full-Stack Template
+# GPMweb
 
 Welcome to the repository for **GPMweb**
 
