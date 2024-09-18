@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     
     if (email === 'admin@admin.com' && password === 'admin') {
-      navigate('/create-project');
+      navigate('/manage');
     } else {
       setError('Invalid email or password');
     }

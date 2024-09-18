@@ -17,6 +17,7 @@ import Membros from './Pages/Equipes/Membros.jsx';
 import Login from './Pages/Login/Login.jsx';
 import Signup from './Pages/Signup/Signup.jsx';
 import CreateProject from './Pages/CreateProject/CreateProject.jsx';
+import ManageProjects from './Pages/ManageProjects/ManageProjects.jsx';
 
 const router = createBrowserRouter([
   {
@@ -57,7 +58,11 @@ const router = createBrowserRouter([
     element: <Signup/>,
   },
   {
-    path: "/create-project",
+    path: "/manage",
+    element: <ManageProjects/>
+  },
+  {
+    path: "/manage/create-project",
     element: <CreateProject/>,
   }
 ]);
