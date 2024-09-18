@@ -18,6 +18,7 @@ import Login from './Pages/Login/Login.jsx';
 import Signup from './Pages/Signup/Signup.jsx';
 import CreateProject from './Pages/CreateProject/CreateProject.jsx';
 import ManageProjects from './Pages/ManageProjects/ManageProjects.jsx';
+import EditProject from './Pages/EditProject/EditProject.jsx';
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
   {
     path: "/manage/create-project",
     element: <CreateProject/>,
+  },
+  {
+    path: "/manage/edit-project",
+    element: <EditProject/>,
   }
 ]);
 

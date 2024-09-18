@@ -16,8 +16,8 @@ const ManageProjects = () => {
     setProjects(projects.filter((project) => project.id !== id));
   };
 
-  const handleEdit = (id) => {
-    navigate(`/projetos/edit/${id}`);
+  const handleEdit = () => {
+    navigate(`/manage/edit-project`);
   };
 
   const handleCreate = () => {
