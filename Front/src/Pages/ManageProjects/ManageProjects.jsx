@@ -2,22 +2,67 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+const DeleteConfirmationModal = ({ showModal, onClose, onConfirm }) => {
+  if (!showModal) return null;
+
+  return (
+    <motion.div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.2 }}
+      >
+        <h2 className="text-xl font-bold mb-4">Confirmar Deleção</h2>
+        <p className="mb-6">Tem certeza que deseja deletar este projeto? Essa ação não pode ser desfeita.</p>
+        <div className="flex justify-end space-x-4">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
+          >
+            Cancelar
+          </button>
+          <button
+            onClick={onConfirm}
+            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md shadow-sm hover:bg-red-700"
+          >
+            Deletar
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 const ManageProjects = () => {
   const navigate = useNavigate();
 
-  // Dados fictícios para simular os projetos
   const [projects, setProjects] = useState([
     { id: 1, titulo_projeto: 'Projeto de Pesquisa A', edital: 'Edital 001/2024' },
     { id: 2, titulo_projeto: 'Projeto de Extensão B', edital: 'Edital 002/2024' },
     { id: 3, titulo_projeto: 'Projeto de Inovação C', edital: 'Edital 003/2024' }
   ]);
 
-  const handleDelete = (id) => {
-    setProjects(projects.filter((project) => project.id !== id));
+  const [showModal, setShowModal] = useState(false);
+  const [projectToDelete, setProjectToDelete] = useState(null);
+
+  const handleDeleteClick = (id) => {
+    setProjectToDelete(id);
+    setShowModal(true);
   };
 
-  const handleEdit = () => {
-    navigate(`/manage/edit-project`);
+  const handleConfirmDelete = () => {
+    setProjects(projects.filter((project) => project.id !== projectToDelete));
+    setShowModal(false);
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/manage/edit-project/${id}`);
   };
 
   const handleCreate = () => {
@@ -67,7 +112,7 @@ const ManageProjects = () => {
                       Editar
                     </motion.button>
                     <motion.button
-                      onClick={() => handleDelete(project.id)}
+                      onClick={() => handleDeleteClick(project.id)}
                       className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md shadow-sm hover:bg-red-700 focus:outline-none"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -83,6 +128,13 @@ const ManageProjects = () => {
           <p className="text-center">Nenhum projeto encontrado.</p>
         )}
       </div>
+
+      {/* Modal de confirmação de deleção */}
+      <DeleteConfirmationModal
+        showModal={showModal}
+        onClose={() => setShowModal(false)}
+        onConfirm={handleConfirmDelete}
+      />
     </motion.div>
   );
 };
