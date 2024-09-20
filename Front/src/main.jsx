@@ -16,9 +16,9 @@ import SaibaMais from './Pages/Projetos/SaibaMais/SaibaMais.jsx';
 import Membros from './Pages/Equipes/Membros.jsx';
 import Login from './Pages/Login/Login.jsx';
 import Signup from './Pages/Signup/Signup.jsx';
-import CreateProject from './Pages/CreateProject/CreateProject.jsx';
+import CreateProject from './Pages/ManageProjects/CreateProject/CreateProject.jsx';
 import ManageProjects from './Pages/ManageProjects/ManageProjects.jsx';
-import EditProject from './Pages/EditProject/EditProject.jsx';
+import EditProject from './Pages/ManageProjects/EditProject/EditProject.jsx';
 
 const router = createBrowserRouter([
   {
