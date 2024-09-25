@@ -70,18 +70,18 @@ const CreateProjectForm = () => {
 
   return (
     <motion.div 
-      className="flex min-h-screen items-center justify-center bg-gray-100"
+      className="flex min-h-screen items-center justify-center bg-gray-50"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <motion.div 
-        className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md border border-green-500"
+        className="w-full max-w-lg p-8 space-y-6 bg-white rounded-lg shadow-md border border-gray-200"
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <h2 className="text-2xl font-bold text-center text-gray-900">Criar Projeto</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800">Criar Projeto</h2>
         <motion.form 
           onSubmit={handleSubmit} 
           className="space-y-6"
@@ -94,7 +94,7 @@ const CreateProjectForm = () => {
           {/* Titulo do Projeto */}
           <div>
             <label htmlFor="titulo_projeto" className="block text-sm font-medium text-gray-700">
-              Titulo do Projeto
+              Título do Projeto
             </label>
             <input
               id="titulo_projeto"
@@ -103,7 +103,8 @@ const CreateProjectForm = () => {
               value={formData.titulo_projeto}
               onChange={(e) => handleChange(e)}
               required
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm"
+              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+              placeholder="Digite o título do projeto"
             />
           </div>
 
@@ -119,7 +120,8 @@ const CreateProjectForm = () => {
               value={formData.edital}
               onChange={(e) => handleChange(e)}
               required
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm"
+              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+              placeholder="Ex: Edital 2024/01"
             />
           </div>
 
@@ -135,7 +137,8 @@ const CreateProjectForm = () => {
               value={formData.area}
               onChange={(e) => handleChange(e)}
               required
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm"
+              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+              placeholder="Área de pesquisa"
             />
           </div>
 
@@ -150,7 +153,8 @@ const CreateProjectForm = () => {
               value={formData.objetivo}
               onChange={(e) => handleChange(e)}
               required
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm"
+              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+              placeholder="Defina os objetivos do projeto"
             />
           </div>
 
@@ -165,7 +169,8 @@ const CreateProjectForm = () => {
               value={formData.metas}
               onChange={(e) => handleChange(e)}
               required
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm"
+              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+              placeholder="Defina as metas do projeto"
             />
           </div>
 
@@ -175,8 +180,12 @@ const CreateProjectForm = () => {
             {formData.discentes.map((discente, index) => (
               <DiscenteForm key={index} discente={discente} index={index} handleChange={handleChange} />
             ))}
-            <button type="button" onClick={addDiscente} className="mt-2 text-blue-500">
-              Adicionar Discente
+            <button 
+              type="button" 
+              onClick={addDiscente} 
+              className="mt-2 text-green-500 hover:text-green-600"
+            >
+              + Adicionar Discente
             </button>
           </div>
 
@@ -186,8 +195,12 @@ const CreateProjectForm = () => {
             {formData.doscentes.map((docente, index) => (
               <DocenteForm key={index} docente={docente} index={index} handleChange={handleChange} />
             ))}
-            <button type="button" onClick={addDocente} className="mt-2 text-blue-500">
-              Adicionar Docente
+            <button 
+              type="button" 
+              onClick={addDocente} 
+              className="mt-2 text-green-500 hover:text-green-600"
+            >
+              + Adicionar Docente
             </button>
           </div>
 
