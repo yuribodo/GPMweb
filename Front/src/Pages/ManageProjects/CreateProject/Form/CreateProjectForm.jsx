@@ -76,7 +76,7 @@ const CreateProjectForm = () => {
       transition={{ duration: 0.5 }}
     >
       <motion.div 
-        className="w-full max-w-lg p-8 space-y-6 bg-white rounded-lg shadow-md border border-gray-200"
+        className="w-full max-w-lg p-8 space-y-6 bg-white rounded-lg shadow-md border border-gray-600"
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
