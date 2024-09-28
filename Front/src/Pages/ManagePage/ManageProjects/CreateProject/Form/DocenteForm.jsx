@@ -5,7 +5,7 @@ const DocenteForm = ({ docente, index, handleChange }) => {
     <div className="space-y-3 bg-gray-50 p-4 rounded-md mb-4 border border-gray-200">
       <h4 className="font-semibold text-gray-800">Docente {index + 1}</h4>
       
-      {/* SIAPE */}
+      
       <div>
         <label htmlFor={`siape-${index}`} className="block text-sm text-gray-600">SIAPE</label>
         <input
@@ -19,7 +19,7 @@ const DocenteForm = ({ docente, index, handleChange }) => {
         />
       </div>
 
-      {/* Nome */}
+      
       <div>
         <label htmlFor={`nome-${index}`} className="block text-sm text-gray-600">Nome</label>
         <input
@@ -33,7 +33,7 @@ const DocenteForm = ({ docente, index, handleChange }) => {
         />
       </div>
 
-      {/* E-mail */}
+      
       <div>
         <label htmlFor={`email-${index}`} className="block text-sm text-gray-600">E-mail</label>
         <input
@@ -47,7 +47,7 @@ const DocenteForm = ({ docente, index, handleChange }) => {
         />
       </div>
 
-      {/* Contato */}
+     
       <div>
         <label htmlFor={`contato-${index}`} className="block text-sm text-gray-600">Contato</label>
         <input
