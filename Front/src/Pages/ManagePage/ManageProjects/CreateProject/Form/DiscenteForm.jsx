@@ -5,7 +5,7 @@ const DiscenteForm = ({ discente, index, handleChange }) => {
     <div className="space-y-3 bg-gray-50 p-4 rounded-md mb-4 border border-gray-200">
       <h4 className="font-semibold text-gray-800">Discente {index + 1}</h4>
       
-      {/* Matrícula */}
+      
       <div>
         <label htmlFor={`matricula-${index}`} className="block text-sm text-gray-600">Matrícula</label>
         <input
@@ -19,7 +19,7 @@ const DiscenteForm = ({ discente, index, handleChange }) => {
         />
       </div>
 
-      {/* Nome */}
+      
       <div>
         <label htmlFor={`nome-${index}`} className="block text-sm text-gray-600">Nome</label>
         <input
@@ -33,7 +33,7 @@ const DiscenteForm = ({ discente, index, handleChange }) => {
         />
       </div>
 
-      {/* CPF */}
+      
       <div>
         <label htmlFor={`cpf-${index}`} className="block text-sm text-gray-600">CPF</label>
         <input
@@ -47,7 +47,7 @@ const DiscenteForm = ({ discente, index, handleChange }) => {
         />
       </div>
 
-      {/* Lattes */}
+     
       <div>
         <label htmlFor={`lattes-${index}`} className="block text-sm text-gray-600">Lattes</label>
         <input
@@ -61,7 +61,7 @@ const DiscenteForm = ({ discente, index, handleChange }) => {
         />
       </div>
 
-      {/* Data de Nascimento */}
+     
       <div>
         <label htmlFor={`date_born-${index}`} className="block text-sm text-gray-600">Data de Nascimento</label>
         <input
@@ -74,7 +74,7 @@ const DiscenteForm = ({ discente, index, handleChange }) => {
         />
       </div>
 
-      {/* Tamanho da Camisa */}
+      
       <div>
         <label htmlFor={`tamanho_camisa-${index}`} className="block text-sm text-gray-600">Tamanho da Camisa</label>
         <input
@@ -88,7 +88,7 @@ const DiscenteForm = ({ discente, index, handleChange }) => {
         />
       </div>
 
-      {/* Contato */}
+     
       <div>
         <label htmlFor={`contato-${index}`} className="block text-sm text-gray-600">Contato</label>
         <input
@@ -102,7 +102,7 @@ const DiscenteForm = ({ discente, index, handleChange }) => {
         />
       </div>
 
-      {/* Bolsista */}
+     
       <div>
         <label htmlFor={`bolsista-${index}`} className="block text-sm text-gray-600">Bolsista</label>
         <input

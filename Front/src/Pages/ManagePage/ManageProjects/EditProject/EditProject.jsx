@@ -3,10 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const EditProject = () => {
-  const { id } = useParams(); // Pegando o id do projeto pela URL
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  // Dados fictícios para simular um projeto a ser editado
+
   const [formData, setFormData] = useState({
     titulo_projeto: 'Projeto de Pesquisa A',
     edital: 'Edital 001/2024',

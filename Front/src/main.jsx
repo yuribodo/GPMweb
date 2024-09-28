@@ -16,9 +16,11 @@ import SaibaMais from './Pages/Projetos/SaibaMais/SaibaMais.jsx';
 import Membros from './Pages/Equipes/Membros.jsx';
 import Login from './Pages/Login/Login.jsx';
 import Signup from './Pages/Signup/Signup.jsx';
-import CreateProject from './Pages/ManageProjects/CreateProject/CreateProject.jsx';
-import ManageProjects from './Pages/ManageProjects/ManageProjects.jsx';
-import EditProject from './Pages/ManageProjects/EditProject/EditProject.jsx';
+import CreateProject from './Pages/ManagePage/ManageProjects/CreateProject/CreateProject.jsx'
+import ManagePage from './Pages/ManagePage/ManagePage.jsx';
+import EditProject from './Pages/ManagePage/ManageProjects/EditProject/EditProject.jsx'
+import CreateNews from './Pages/ManagePage/ManageNews/CreateNews/CreateNews.jsx';
+import EditNews from './Pages/ManagePage/ManageNews/EditNews/EditNews.jsx';
 
 const router = createBrowserRouter([
   {
@@ -60,7 +62,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/manage",
-    element: <ManageProjects/>
+    element: <ManagePage/>
   },
   {
     path: "/manage/create-project",
@@ -69,6 +71,14 @@ const router = createBrowserRouter([
   {
     path: "/manage/edit-project",
     element: <EditProject/>,
+  },
+  {
+    path: "/manage/create-news",
+    element: <CreateNews/>,
+  },
+  {
+    path: "/manage/edit-news/:id",
+    element: <EditNews/>,
   }
 ]);
 

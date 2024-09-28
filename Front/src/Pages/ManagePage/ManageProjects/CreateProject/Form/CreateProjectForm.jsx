@@ -25,7 +25,7 @@ const CreateProjectForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  // Função para lidar com mudanças nos campos do formulário
+  
   const handleChange = (e, index, type) => {
     const { name, value } = e.target;
     setFormData((prev) => {
@@ -41,7 +41,7 @@ const CreateProjectForm = () => {
     });
   };
 
-  // Função para adicionar um novo discente
+  
   const addDiscente = () => {
     setFormData((prev) => ({
       ...prev,
@@ -49,7 +49,7 @@ const CreateProjectForm = () => {
     }));
   };
 
-  // Função para adicionar um novo docente
+  
   const addDocente = () => {
     setFormData((prev) => ({
       ...prev,
@@ -57,7 +57,7 @@ const CreateProjectForm = () => {
     }));
   };
 
-  // Função para envio do formulário
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -91,7 +91,7 @@ const CreateProjectForm = () => {
         >
           {error && <p className="text-red-500">{error}</p>}
 
-          {/* Titulo do Projeto */}
+          
           <div>
             <label htmlFor="titulo_projeto" className="block text-sm font-medium text-gray-700">
               Título do Projeto
@@ -108,7 +108,6 @@ const CreateProjectForm = () => {
             />
           </div>
 
-          {/* Edital */}
           <div>
             <label htmlFor="edital" className="block text-sm font-medium text-gray-700">
               Edital
@@ -125,7 +124,7 @@ const CreateProjectForm = () => {
             />
           </div>
 
-          {/* Area */}
+          
           <div>
             <label htmlFor="area" className="block text-sm font-medium text-gray-700">
               Área
@@ -142,7 +141,7 @@ const CreateProjectForm = () => {
             />
           </div>
 
-          {/* Objetivo */}
+         
           <div>
             <label htmlFor="objetivo" className="block text-sm font-medium text-gray-700">
               Objetivo
@@ -158,7 +157,7 @@ const CreateProjectForm = () => {
             />
           </div>
 
-          {/* Metas */}
+          
           <div>
             <label htmlFor="metas" className="block text-sm font-medium text-gray-700">
               Metas
@@ -174,7 +173,7 @@ const CreateProjectForm = () => {
             />
           </div>
 
-          {/* Seção de Discentes */}
+          
           <div>
             <h3 className="text-xl font-bold text-gray-900">Discentes</h3>
             {formData.discentes.map((discente, index) => (
@@ -189,7 +188,7 @@ const CreateProjectForm = () => {
             </button>
           </div>
 
-          {/* Seção de Docentes */}
+         
           <div>
             <h3 className="text-xl font-bold text-gray-900">Docentes</h3>
             {formData.doscentes.map((docente, index) => (
@@ -204,7 +203,7 @@ const CreateProjectForm = () => {
             </button>
           </div>
 
-          {/* Botão de Envio */}
+          
           <motion.button
             type="submit"
             className="w-full px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
