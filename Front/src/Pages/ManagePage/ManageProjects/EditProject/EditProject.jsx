@@ -24,7 +24,7 @@ const EditProject = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aqui você pode fazer a requisição para editar o projeto
+    
     console.log('Projeto editado com sucesso:', formData);
     navigate('/projetos', { state: { message: 'Projeto editado com sucesso!' } });
   };
