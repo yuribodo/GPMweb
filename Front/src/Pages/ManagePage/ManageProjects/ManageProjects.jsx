@@ -14,7 +14,7 @@ const ManageProjects = () => {
   const [projectToDelete, setProjectToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [projectsPerPage] = useState(10);
+  const [projectsPerPage] = useState(5);
 
   const api = import.meta.env.VITE_API_LINK;
 
