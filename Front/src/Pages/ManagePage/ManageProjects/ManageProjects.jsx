@@ -78,7 +78,7 @@ const ManageProjects = () => {
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
   const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
 
-  // Change page
+  
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {

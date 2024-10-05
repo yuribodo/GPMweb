@@ -8,6 +8,7 @@ const EditProject = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const [formData, setFormData] = useState({
     titulo_projeto: '',
@@ -16,7 +17,6 @@ const EditProject = () => {
     objetivo: '',
     metas: '',
   });
-
 
   const api = import.meta.env.VITE_API_LINK;
 
@@ -47,7 +47,11 @@ const EditProject = () => {
     e.preventDefault();
     try {
       await axios.put(`${api}/projetos/${id}`, formData);
-      navigate('/manage', { state: { message: 'Projeto editado com sucesso!' } });
+      setSuccessMessage('Projeto editado com sucesso!');
+      setTimeout(() => {
+        setSuccessMessage('');
+        navigate('/manage', { state: { message: 'Projeto editado com sucesso!' } });
+      }, 3000); 
     } catch (error) {
       console.error('Erro ao editar projeto:', error);
       setError('Falha ao editar o projeto. Por favor, tente novamente mais tarde.');
@@ -76,6 +80,20 @@ const EditProject = () => {
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
         <h2 className="text-2xl font-bold text-center text-gray-900">Editar Projeto</h2>
+
+        
+        {successMessage && (
+          <motion.div
+            className="p-4 mb-4 text-sm text-green-800 bg-green-100 rounded-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {successMessage}
+          </motion.div>
+        )}
+
         <motion.form 
           onSubmit={handleSubmit} 
           className="space-y-6"
