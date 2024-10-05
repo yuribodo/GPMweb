@@ -1,27 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 const EditNews = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [news, setNews] = useState({ titulo: '', tipo: '', link: '', projetoId: '' });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const api = import.meta.env.VITE_API_LINK;
 
   useEffect(() => {
-    // Simulating fetching news data
-    const fetchedNews = { id: id, titulo: 'Notícia Exemplo', tipo: 'noticia', link: 'https://example.com', projetoId: '1' };
-    setNews(fetchedNews);
+    const fetchNews = async () => {
+      try {
+        const response = await axios.get(`${api}/noticias/${id}`);
+        setNews(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Erro ao buscar dados da notícia:', error);
+        setError('Falha ao carregar os dados da notícia. Por favor, tente novamente mais tarde.');
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
   }, [id]);
 
   const handleChange = (e) => {
     setNews({ ...news, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Notícia atualizada:', news);
-    navigate('/manage');
+    try {
+      await axios.put(`${api}/noticias/${id}`, news);
+      navigate('/manage', { state: { message: 'Notícia atualizada com sucesso!' } });
+    } catch (error) {
+      console.error('Erro ao atualizar notícia:', error);
+      setError('Falha ao atualizar a notícia. Por favor, tente novamente mais tarde.');
+    }
   };
+
+  if (loading) {
+    return <div className="text-center mt-8">Carregando dados da notícia...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center mt-8 text-red-600">{error}</div>;
+  }
 
   return (
     <motion.div 

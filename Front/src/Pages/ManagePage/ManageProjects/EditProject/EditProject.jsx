@@ -1,19 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 const EditProject = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const [formData, setFormData] = useState({
-    titulo_projeto: 'Projeto de Pesquisa A',
-    edital: 'Edital 001/2024',
-    area: 'Ciências Exatas',
-    objetivo: 'Desenvolver tecnologias inovadoras.',
-    metas: 'Alcançar resultados em 2025.',
+    titulo_projeto: '',
+    edital: '',
+    area: '',
+    objetivo: '',
+    metas: '',
   });
+
+  const api = import.meta.env.VITE_API_LINK;
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const response = await axios.get(`${api}/projetos/${id}`);
+        setFormData(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Erro ao buscar dados do projeto:', error);
+        setError('Falha ao carregar os dados do projeto. Por favor, tente novamente mais tarde.');
+        setLoading(false);
+      }
+    };
+
+    fetchProject();
+  }, [id]);
 
   const handleChange = (e) => {
     setFormData({
@@ -22,12 +43,28 @@ const EditProject = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    console.log('Projeto editado com sucesso:', formData);
-    navigate('/projetos', { state: { message: 'Projeto editado com sucesso!' } });
+    try {
+      await axios.put(`${api}/projetos/${id}`, formData);
+      setSuccessMessage('Projeto editado com sucesso!');
+      setTimeout(() => {
+        setSuccessMessage('');
+        navigate('/manage', { state: { message: 'Projeto editado com sucesso!' } });
+      }, 3000); 
+    } catch (error) {
+      console.error('Erro ao editar projeto:', error);
+      setError('Falha ao editar o projeto. Por favor, tente novamente mais tarde.');
+    }
   };
+
+  if (loading) {
+    return <div className="text-center mt-8">Carregando dados do projeto...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center mt-8 text-red-600">{error}</div>;
+  }
 
   return (
     <motion.div 
@@ -43,6 +80,20 @@ const EditProject = () => {
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
         <h2 className="text-2xl font-bold text-center text-gray-900">Editar Projeto</h2>
+
+        
+        {successMessage && (
+          <motion.div
+            className="p-4 mb-4 text-sm text-green-800 bg-green-100 rounded-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {successMessage}
+          </motion.div>
+        )}
+
         <motion.form 
           onSubmit={handleSubmit} 
           className="space-y-6"
