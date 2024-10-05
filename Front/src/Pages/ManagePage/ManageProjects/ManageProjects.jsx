@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import DeleteConfirmationModal from '../DeleteConfirmationModal';
+import SkeletonLoader from '../../../Components/SkeletonLoader';
 
 const ManageProjects = () => {
   const navigate = useNavigate();
@@ -82,7 +83,14 @@ const ManageProjects = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
-    return <div className="text-center mt-8">Carregando projetos...</div>;
+    return (
+      <div className="flex flex-col min-h-screen items-center justify-center bg-gray-100 p-8">
+        <div className="w-full max-w-4xl bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-2xl font-bold text-center mb-6">Gerenciar Projetos</h2>
+          <SkeletonLoader rows={5} />
+        </div>
+      </div>
+    );
   }
 
   if (error) {
