@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import DeleteConfirmationModal from '../DeleteConfirmationModal';
+import SkeletonLoader from '../../../Components/SkeletonLoader';
 
 const ManageProjects = () => {
   const navigate = useNavigate();
@@ -82,7 +83,14 @@ const ManageProjects = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
-    return <div className="text-center mt-8">Carregando projetos...</div>;
+    return (
+      <div className="flex flex-col min-h-screen items-center justify-center bg-gray-100 p-8">
+        <div className="w-full max-w-4xl bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-2xl font-bold text-center mb-6">Gerenciar Projetos</h2>
+          <SkeletonLoader rows={5} />
+        </div>
+      </div>
+    );
   }
 
   if (error) {
@@ -128,31 +136,35 @@ const ManageProjects = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentProjects.map((project) => (
-                  <tr key={project.id}>
-                    <td className="border px-4 py-2">{project.titulo_projeto}</td>
-                    <td className="border px-4 py-2">{project.edital}</td>
-                    <td className="border px-4 py-2">
-                      <motion.button
-                        onClick={() => handleEdit(project.id)}
-                        className="mr-2 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        Editar
-                      </motion.button>
-                      <motion.button
-                        onClick={() => handleDeleteClick(project.id)}
-                        className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md shadow-sm hover:bg-red-700 focus:outline-none"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        Deletar
-                      </motion.button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+                  {currentProjects.map((project) => (
+                    <tr key={project.id}>
+                      <td className="border px-4 py-2 max-w-[400px] truncate" title={project.titulo_projeto}>
+                        {project.titulo_projeto}
+                      </td>
+                      <td className="border px-4 py-2 max-w-[100px] truncate" title={project.edital}>
+                        {project.edital}
+                      </td>
+                      <td className="border px-4 py-2 flex justify-center space-x-2">
+                        <motion.button
+                          onClick={() => handleEdit(project.id)}
+                          className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          Editar
+                        </motion.button>
+                        <motion.button
+                          onClick={() => handleDeleteClick(project.id)}
+                          className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md shadow-sm hover:bg-red-700 focus:outline-none"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          Deletar
+                        </motion.button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
             </table>
             <div className="mt-4 flex justify-center">
               {[...Array(Math.ceil(filteredProjects.length / projectsPerPage)).keys()].map((number) => (
