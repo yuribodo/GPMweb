@@ -136,31 +136,35 @@ const ManageProjects = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentProjects.map((project) => (
-                  <tr key={project.id}>
-                    <td className="border px-4 py-2">{project.titulo_projeto}</td>
-                    <td className="border px-4 py-2">{project.edital}</td>
-                    <td className="border px-4 py-2">
-                      <motion.button
-                        onClick={() => handleEdit(project.id)}
-                        className="mr-2 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        Editar
-                      </motion.button>
-                      <motion.button
-                        onClick={() => handleDeleteClick(project.id)}
-                        className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md shadow-sm hover:bg-red-700 focus:outline-none"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        Deletar
-                      </motion.button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+                  {currentProjects.map((project) => (
+                    <tr key={project.id}>
+                      <td className="border px-4 py-2 max-w-[400px] truncate" title={project.titulo_projeto}>
+                        {project.titulo_projeto}
+                      </td>
+                      <td className="border px-4 py-2 max-w-[100px] truncate" title={project.edital}>
+                        {project.edital}
+                      </td>
+                      <td className="border px-4 py-2 flex justify-center space-x-2">
+                        <motion.button
+                          onClick={() => handleEdit(project.id)}
+                          className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          Editar
+                        </motion.button>
+                        <motion.button
+                          onClick={() => handleDeleteClick(project.id)}
+                          className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md shadow-sm hover:bg-red-700 focus:outline-none"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          Deletar
+                        </motion.button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
             </table>
             <div className="mt-4 flex justify-center">
               {[...Array(Math.ceil(filteredProjects.length / projectsPerPage)).keys()].map((number) => (
