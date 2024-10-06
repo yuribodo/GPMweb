@@ -59,6 +59,12 @@ const EditNews = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="w-full max-w-2xl bg-white rounded-lg shadow-md p-6">
+        <button 
+          onClick={() => navigate(-1)} 
+          className="text-sm font-medium text-indigo-600 hover:text-indigo-500 mb-4"
+        >
+          &larr; Voltar
+        </button>
         <h2 className="text-2xl font-bold text-center mb-6">Editar Notícia</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">

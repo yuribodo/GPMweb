@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { FiArrowLeft } from 'react-icons/fi';
 
 const CreateNews = () => {
   const navigate = useNavigate();
@@ -32,14 +33,29 @@ const CreateNews = () => {
   };
 
   return (
+    
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="flex flex-col items-center justify-center min-h-screen bg-gray-100"
     >
-      <div className="w-full max-w-2xl bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-3xl font-bold text-center mb-6">Criar Nova Notícia</h2>
+     
+     <div className="w-full max-w-2xl bg-white rounded-lg shadow-md p-6">
+      <div className="flex items-center justify-center mb-6">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md shadow-md hover:bg-blue-600 focus:outline-none transition-colors"
+        >
+          <FiArrowLeft className="mr-2" />
+          Voltar
+        </button>
+        <h2 className="flex-grow text-3xl font-bold text-center">Criar Nova Notícia</h2>
+      </div>
+      
+        
+        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="titulo" className="block mb-2 text-sm font-medium text-gray-700">Título</label>
