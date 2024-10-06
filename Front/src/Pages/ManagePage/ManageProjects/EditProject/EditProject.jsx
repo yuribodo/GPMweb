@@ -79,6 +79,12 @@ const EditProject = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
+        <button
+          onClick={() => navigate(-1)}
+          className="text-blue-600 underline mb-4"
+        >
+          Voltar
+        </button>
         <h2 className="text-2xl font-bold text-center text-gray-900">Editar Projeto</h2>
 
         
