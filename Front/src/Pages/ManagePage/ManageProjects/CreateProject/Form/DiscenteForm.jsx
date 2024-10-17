@@ -1,100 +1,126 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import InputMask from 'react-input-mask';
 
 const DiscenteForm = ({ discente, index, handleChange }) => {
+  const [errors, setErrors] = useState({});
+  
+  
+  const validateCPF = (cpf) => {
+    const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+    if (!cpf) return 'CPF é obrigatório';
+    if (!cpfRegex.test(cpf)) return 'CPF inválido (formato: xxx.xxx.xxx-xx)';
+    return '';
+  };
+
+  const validateMatricula = (matricula) => {
+    if (!matricula) return 'Matrícula é obrigatória';
+    if (matricula.length < 10) return 'Matrícula deve ter no mínimo 10 caracteres';
+    return '';
+  };
+
+  const validateNome = (nome) => {
+    if (!nome) return 'Nome é obrigatório';
+    if (nome.length < 3) return 'Nome deve ter no mínimo 3 caracteres';
+    return '';
+  };
+
+  
+  const validateField = (name, value) => {
+    switch (name) {
+      case 'cpf':
+        return validateCPF(value);
+      case 'matricula':
+        return validateMatricula(value);
+      case 'nome':
+        return validateNome(value);
+      default:
+        return '';
+    }
+  };
+
+  
+  const handleFieldChange = (e, index, type) => {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+    
+    setErrors(prev => ({
+      ...prev,
+      [name]: error
+    }));
+
+    handleChange(e, index, type);
+  };
+
   return (
     <div className="space-y-3 bg-gray-50 p-4 rounded-md mb-4 border border-gray-200">
       <h4 className="font-semibold text-gray-800">Discente {index + 1}</h4>
       
-      
       <div>
-        <label htmlFor={`matricula-${index}`} className="block text-sm text-gray-600">Matrícula</label>
+        <label htmlFor={`matricula-${index}`} className="block text-sm text-gray-600">
+          Matrícula<span className="text-red-500">*</span>
+        </label>
         <input
           id={`matricula-${index}`}
           name="matricula"
           type="text"
           value={discente.matricula}
-          onChange={(e) => handleChange(e, index, 'discente')}
-          className="w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500"
+          onChange={(e) => handleFieldChange(e, index, 'discente')}
+          className={`w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500 
+            ${errors.matricula ? 'border-red-500' : 'border-gray-300'}`}
           placeholder="Digite a matrícula"
+          required
         />
+        {errors.matricula && (
+          <p className="mt-1 text-sm text-red-500">{errors.matricula}</p>
+        )}
       </div>
 
-      
       <div>
-        <label htmlFor={`nome-${index}`} className="block text-sm text-gray-600">Nome</label>
+        <label htmlFor={`nome-${index}`} className="block text-sm text-gray-600">
+          Nome<span className="text-red-500">*</span>
+        </label>
         <input
           id={`nome-${index}`}
           name="nome"
           type="text"
           value={discente.nome}
-          onChange={(e) => handleChange(e, index, 'discente')}
-          className="w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500"
+          onChange={(e) => handleFieldChange(e, index, 'discente')}
+          className={`w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500
+            ${errors.nome ? 'border-red-500' : 'border-gray-300'}`}
           placeholder="Digite o nome"
+          required
         />
+        {errors.nome && (
+          <p className="mt-1 text-sm text-red-500">{errors.nome}</p>
+        )}
       </div>
 
-      
       <div>
-        <label htmlFor={`cpf-${index}`} className="block text-sm text-gray-600">CPF</label>
-        <input
+        <label htmlFor={`cpf-${index}`} className="block text-sm text-gray-600">
+          CPF<span className="text-red-500">*</span>
+        </label>
+        <InputMask
           id={`cpf-${index}`}
           name="cpf"
-          type="text"
+          mask="999.999.999-99"
           value={discente.cpf}
-          onChange={(e) => handleChange(e, index, 'discente')}
-          className="w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500"
+          onChange={(e) => handleFieldChange(e, index, 'discente')}
+          className={`w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500
+            ${errors.cpf ? 'border-red-500' : 'border-gray-300'}`}
           placeholder="Digite o CPF"
+          required
         />
+        {errors.cpf && (
+          <p className="mt-1 text-sm text-red-500">{errors.cpf}</p>
+        )}
       </div>
 
-     
-      <div>
-        <label htmlFor={`lattes-${index}`} className="block text-sm text-gray-600">Lattes</label>
-        <input
-          id={`lattes-${index}`}
-          name="lates"
-          type="text"
-          value={discente.lates}
-          onChange={(e) => handleChange(e, index, 'discente')}
-          className="w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500"
-          placeholder="Link do currículo Lattes"
-        />
-      </div>
-
-     
-      <div>
-        <label htmlFor={`date_born-${index}`} className="block text-sm text-gray-600">Data de Nascimento</label>
-        <input
-          id={`date_born-${index}`}
-          name="date_born"
-          type="date"
-          value={discente.date_born}
-          onChange={(e) => handleChange(e, index, 'discente')}
-          className="w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500"
-        />
-      </div>
-
-      
-      <div>
-        <label htmlFor={`tamanho_camisa-${index}`} className="block text-sm text-gray-600">Tamanho da Camisa</label>
-        <input
-          id={`tamanho_camisa-${index}`}
-          name="tamanho_camisa"
-          type="text"
-          value={discente.tamanho_camisa}
-          onChange={(e) => handleChange(e, index, 'discente')}
-          className="w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500"
-          placeholder="Digite o tamanho da camisa"
-        />
-      </div>
-
-     
       <div>
         <label htmlFor={`contato-${index}`} className="block text-sm text-gray-600">Contato</label>
-        <input
+        <InputMask
           id={`contato-${index}`}
           name="contato"
-          type="text"
+          mask="(99) 99999-9999"
           value={discente.contato}
           onChange={(e) => handleChange(e, index, 'discente')}
           className="w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500"
@@ -102,7 +128,6 @@ const DiscenteForm = ({ discente, index, handleChange }) => {
         />
       </div>
 
-     
       <div>
         <label htmlFor={`bolsista-${index}`} className="block text-sm text-gray-600">Bolsista</label>
         <input
