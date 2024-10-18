@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import InputMask from 'react-input-mask';
+import ReactInputMask from 'react-input-mask';
 
 const DocenteForm = ({ docente, index, handleChange }) => {
   const [errors, setErrors] = useState({});
@@ -121,7 +121,7 @@ const DocenteForm = ({ docente, index, handleChange }) => {
       
       <div>
         <label htmlFor={`contato-${index}`} className="block text-sm text-gray-600">Contato</label>
-        <InputMask
+        <ReactInputMask
           mask="(99) 99999-9999"
           id={`contato-${index}`}
           name="contato"
@@ -136,7 +136,7 @@ const DocenteForm = ({ docente, index, handleChange }) => {
               placeholder="Digite o contato"
             />
           )}
-        </InputMask>
+        </ReactInputMask>
       </div>
     </div>
   );

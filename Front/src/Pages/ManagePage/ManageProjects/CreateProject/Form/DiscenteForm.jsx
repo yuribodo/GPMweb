@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import InputMask from 'react-input-mask';
+import ReactInputMask from 'react-input-mask';
 
 const DiscenteForm = ({ discente, index, handleChange }) => {
   const [errors, setErrors] = useState({});
@@ -99,7 +99,7 @@ const DiscenteForm = ({ discente, index, handleChange }) => {
         <label htmlFor={`cpf-${index}`} className="block text-sm text-gray-600">
           CPF<span className="text-red-500">*</span>
         </label>
-        <InputMask
+        <ReactInputMask
           id={`cpf-${index}`}
           name="cpf"
           mask="999.999.999-99"
@@ -117,7 +117,7 @@ const DiscenteForm = ({ discente, index, handleChange }) => {
 
       <div>
         <label htmlFor={`contato-${index}`} className="block text-sm text-gray-600">Contato</label>
-        <InputMask
+        <ReactInputMask
           id={`contato-${index}`}
           name="contato"
           mask="(99) 99999-9999"
