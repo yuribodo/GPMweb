@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import DiscenteForm from './DiscenteForm';
-import DocenteForm from './DocenteForm';
+import DocenteForm from '../../../ManageDocente/CreateDocente/DocenteForm';
 
 const api = import.meta.env.VITE_API_LINK;
 
