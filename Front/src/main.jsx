@@ -86,7 +86,7 @@ const router = createBrowserRouter([
     element: <EditNews/>,
   },
   {
-    path: "/manage/create-discentes",
+    path: "/manage/create-discente",
     element: <CreateDiscentePage/>,
   },
   {

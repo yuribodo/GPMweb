@@ -37,7 +37,7 @@ const CreateDocentePage = () => {
 
   const removeDocente = (index) => {
     if (docentes.length === 1) {
-      return; // Não permite remover se só houver um docente
+      return; 
     }
     const newDocentes = docentes.filter((_, i) => i !== index);
     setDocentes(newDocentes);
@@ -64,13 +64,13 @@ const CreateDocentePage = () => {
     setIsSubmitting(true);
 
     try {
-      // Aqui você implementaria a chamada à sua API
+      // Aqui você implementa a chamada à API
       console.log('Dados a serem enviados:', docentes);
       
-      // Simular um delay para demonstração
+      
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Limpar o formulário após sucesso
+      
       setDocentes([{
         siape: '',
         nome: '',
@@ -78,7 +78,7 @@ const CreateDocentePage = () => {
         contato: ''
       }]);
       
-      // Aqui você pode adicionar uma notificação de sucesso
+      
       alert('Docente(s) cadastrado(s) com sucesso!');
       
     } catch (error) {
@@ -94,7 +94,7 @@ const CreateDocentePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Botão Voltar */}
+      
       <div className="container mx-auto pt-4 px-4">
         <button
           onClick={handleBack}
@@ -105,7 +105,7 @@ const CreateDocentePage = () => {
         </button>
       </div>
 
-      {/* Conteúdo Principal */}
+      
       <div className="container mx-auto px-4 pb-6 max-w-3xl">
         <div className="bg-white rounded-lg shadow-md">
           <div className="p-6 border-b border-gray-200">
