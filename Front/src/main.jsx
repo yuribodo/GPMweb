@@ -21,6 +21,11 @@ import ManagePage from './Pages/ManagePage/ManagePage.jsx';
 import EditProject from './Pages/ManagePage/ManageProjects/EditProject/EditProject.jsx'
 import CreateNews from './Pages/ManagePage/ManageNews/CreateNews/CreateNews.jsx';
 import EditNews from './Pages/ManagePage/ManageNews/EditNews/EditNews.jsx';
+import CreateDiscentePage from './Pages/ManagePage/ManageDiscentes/CreateDiscente/CreateDiscentePage.jsx';
+import CreateDocentePage from './Pages/ManagePage/ManageDocente/CreateDocente/CreateDocentePage.jsx';
+import EditDiscentePage from './Pages/ManagePage/ManageDiscentes/EditDiscente/EditDiscentePage.jsx';
+import EditDocentePage from './Pages/ManagePage/ManageDocente/EditDocente/EditDocentePage.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -79,7 +84,23 @@ const router = createBrowserRouter([
   {
     path: "/manage/edit-news/:id",
     element: <EditNews/>,
-  }
+  },
+  {
+    path: "/manage/create-discentes",
+    element: <CreateDiscentePage/>,
+  },
+  {
+    path: "/manage/edit-discentes/:id",  
+    element: <EditDiscentePage/>,
+  },
+  {
+    path: "/manage/create-docente",
+    element: <CreateDocentePage/>,
+  },
+  {
+    path: "/manage/edit-docente/:id",  
+    element: <EditDocentePage/>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
