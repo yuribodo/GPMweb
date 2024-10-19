@@ -122,7 +122,7 @@ const ManageDiscentes = () => {
                   <tr className="bg-gray-50">
                     <th className="px-4 py-2">Matrícula</th>
                     <th className="px-4 py-2">Nome</th>
-                    <th className="px-4 py-2">Projeto</th>
+                    
                     <th className="px-4 py-2">Bolsista</th>
                     <th className="px-4 py-2">Ações</th>
                   </tr>
@@ -132,7 +132,7 @@ const ManageDiscentes = () => {
                     <tr key={discente.id} className="border-b">
                       <td className="px-4 py-2 text-center">{discente.matricula}</td>
                       <td className="px-4 py-2">{discente.nome}</td>
-                      <td className="px-4 py-2">{discente.projeto.titulo_projeto}</td>
+                      
                       <td className="px-4 py-2 text-center">
                         {discente.bolsista ? 'Sim' : 'Não'}
                       </td>

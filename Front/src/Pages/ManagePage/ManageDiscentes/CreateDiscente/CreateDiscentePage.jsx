@@ -1,115 +1,125 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AlertCircle, Save, Plus, Trash2, ArrowLeft } from 'lucide-react';
 import DiscenteForm from './DiscenteForm';
-import axios from 'axios'; // Adicionando o axios para realizar a chamada à API
+import axios from 'axios';
 
 const CreateDiscentePage = () => {
-  const [discentes, setDiscentes] = useState([{
+  const [discente, setDiscente] = useState({
     matricula: '',
     nome: '',
     cpf: '',
+    lates: '',
+    date_born: null,
+    projetoId: '',
+    tamanho_camisa: '',
     contato: '',
     bolsista: false
-  }]);
+  });
   
+  const [projetos, setProjetos] = useState([]);
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const api = import.meta.env.VITE_API_LINK;
 
-  const handleChange = (e, index, type) => {
-    const { name, value, type: inputType, checked } = e.target;
-    const newDiscentes = [...discentes];
-    newDiscentes[index] = {
-      ...newDiscentes[index],
-      [name]: inputType === 'checkbox' ? checked : value
-    };
-    setDiscentes(newDiscentes);
-  };
-
-  const addDiscente = () => {
-    setDiscentes([
-      ...discentes,
-      {
-        matricula: '',
-        nome: '',
-        cpf: '',
-        contato: '',
-        bolsista: false
+  useEffect(() => {
+    const fetchProjetos = async () => {
+      try {
+        const response = await axios.get(`${api}/projetos`);
+        setProjetos(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar projetos:', error);
       }
-    ]);
-  };
+    };
+    fetchProjetos();
+  }, []);
 
-  const removeDiscente = (index) => {
-    if (discentes.length === 1) {
-      return; 
-    }
-    const newDiscentes = discentes.filter((_, i) => i !== index);
-    setDiscentes(newDiscentes);
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setDiscente((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : 
+              name === 'matricula' ? (value === '' ? '' : parseInt(value, 10)) : 
+              value
+    }));
   };
 
   const validateForm = () => {
-    for (const discente of discentes) {
-      if (!discente.matricula || !discente.nome || !discente.cpf) {
-        return false;
-      }
-      
-      const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-      if (!cpfRegex.test(discente.cpf)) {
-        return false;
-      }
-
-      if (discente.matricula.length < 10) {
-        return false;
-      }
+    if (!discente.matricula || !discente.nome || !discente.cpf || 
+        !discente.date_born || !discente.projetoId || !discente.tamanho_camisa) {
+      return false;
     }
+    
+    const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+    if (!cpfRegex.test(discente.cpf)) {
+      return false;
+    }
+
+    if (discente.matricula.toString().length < 5) {
+      return false;
+    }
+
     return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError('');
-
+  
     if (!validateForm()) {
       setSubmitError('Por favor, preencha todos os campos obrigatórios corretamente.');
       return;
     }
-
+  
+    // Check for valid date_born
+    const date = new Date(discente.date_born);
+    if (isNaN(date.getTime())) {
+      setSubmitError('Por favor, insira uma data de nascimento válida.');
+      return;
+    }
+  
     setIsSubmitting(true);
-
+  
     try {
-     
-      const response = await axios.post(`${api}/discentes`, { discentes });
-      
-      console.log('Resposta da API:', response.data);
+      const formattedDiscente = {
+        ...discente,
+        date_born: new Date(discente.date_born).toISOString().slice(0, 10), // Ensure it's in ISO format
+        projetoId: parseInt(discente.projetoId, 10)
+      };
 
-      setDiscentes([{
+      // Log the data being sent
+      console.log('Dados do Discente a serem enviados:', formattedDiscente);
+  
+      const response = await axios.post(`${api}/discentes`, formattedDiscente);
+  
+      // Reset form after successful submission
+      setDiscente({
         matricula: '',
         nome: '',
         cpf: '',
+        lates: '',
+        date_born: null,
+        projetoId: '',
+        tamanho_camisa: '',
         contato: '',
         bolsista: false
-      }]);
-
-      alert('Discente(s) cadastrado(s) com sucesso!');
+      });
+  
+      alert('Discente cadastrado com sucesso!');
       
     } catch (error) {
       console.error('Erro ao enviar dados para a API:', error);
-      setSubmitError('Erro ao cadastrar discente(s). Por favor, tente novamente.');
+      setSubmitError('Erro ao cadastrar discente. Por favor, tente novamente.');
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleBack = () => {
-    window.history.back();
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto pt-4 px-4">
         <button
-          onClick={handleBack}
+          onClick={() => window.history.back()}
           className="flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-4 py-2"
         >
           <ArrowLeft className="h-5 w-5" />
@@ -133,35 +143,13 @@ const CreateDiscentePage = () => {
                 </div>
               )}
 
-              {discentes.map((discente, index) => (
-                <div key={index} className="relative">
-                  <DiscenteForm
-                    discente={discente}
-                    index={index}
-                    handleChange={handleChange}
-                  />
-                  {discentes.length > 1 && (
-                    <button
-                      type="button"
-                      className="absolute top-2 right-2 p-2 text-red-600 hover:text-red-800"
-                      onClick={() => removeDiscente(index)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  )}
-                </div>
-              ))}
+              <DiscenteForm
+                discente={discente}
+                handleChange={handleChange}
+                projetos={projetos}
+              />
 
               <div className="flex gap-4">
-                <button
-                  type="button"
-                  onClick={addDiscente}
-                  className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
-                >
-                  <Plus className="h-4 w-4" />
-                  Adicionar Discente
-                </button>
-
                 <button
                   type="submit"
                   className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
