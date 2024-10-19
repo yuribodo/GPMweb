@@ -74,7 +74,7 @@ const ManageProjects = () => {
     setSearchTerm(event.target.value);
   };
 
-  // Get current projects
+  
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
   const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
