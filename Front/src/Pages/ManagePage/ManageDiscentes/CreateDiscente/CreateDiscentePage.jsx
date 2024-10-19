@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AlertCircle, Save, Plus, Trash2, ArrowLeft } from 'lucide-react';
 import DiscenteForm from './DiscenteForm';
+import axios from 'axios'; // Adicionando o axios para realizar a chamada à API
 
 const CreateDiscentePage = () => {
   const [discentes, setDiscentes] = useState([{
@@ -13,6 +14,8 @@ const CreateDiscentePage = () => {
   
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const api = import.meta.env.VITE_API_LINK;
 
   const handleChange = (e, index, type) => {
     const { name, value, type: inputType, checked } = e.target;
@@ -51,13 +54,11 @@ const CreateDiscentePage = () => {
         return false;
       }
       
-      
       const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
       if (!cpfRegex.test(discente.cpf)) {
         return false;
       }
-      
-      
+
       if (discente.matricula.length < 10) {
         return false;
       }
@@ -77,13 +78,11 @@ const CreateDiscentePage = () => {
     setIsSubmitting(true);
 
     try {
-      // Aqui você implementachamada à API
-      console.log('Dados a serem enviados:', discentes);
-      
      
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await axios.post(`${api}/discentes`, { discentes });
       
-      
+      console.log('Resposta da API:', response.data);
+
       setDiscentes([{
         matricula: '',
         nome: '',
@@ -91,11 +90,11 @@ const CreateDiscentePage = () => {
         contato: '',
         bolsista: false
       }]);
-      
-      
+
       alert('Discente(s) cadastrado(s) com sucesso!');
       
     } catch (error) {
+      console.error('Erro ao enviar dados para a API:', error);
       setSubmitError('Erro ao cadastrar discente(s). Por favor, tente novamente.');
     } finally {
       setIsSubmitting(false);
@@ -108,7 +107,6 @@ const CreateDiscentePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      
       <div className="container mx-auto pt-4 px-4">
         <button
           onClick={handleBack}
@@ -119,7 +117,6 @@ const CreateDiscentePage = () => {
         </button>
       </div>
 
-     
       <div className="container mx-auto px-4 pb-6 max-w-3xl">
         <div className="bg-white rounded-lg shadow-md">
           <div className="p-6 border-b border-gray-200">
