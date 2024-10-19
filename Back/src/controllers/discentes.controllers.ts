@@ -26,27 +26,49 @@ export const getDiscenteById = async (req: Request, res: Response) => {
   }
 };
 
+
 export const createDiscente = async (req: Request, res: Response) => {
-  const { matricula, nome, cpf, lates, date_born, projetoId, tamanho_camisa, contato, bolsista } = req.body;
-  try {
+    const { matricula, nome, cpf, lates, date_born, projetoId, tamanho_camisa, contato, bolsista } = req.body;
+  
+    try {
+      
+      let projeto = null;
+      if (projetoId) {
+        projeto = await prisma.projeto.findUnique({
+          where: { id: projetoId }
+        });
+  
+        if (!projeto) {
+          return res.status(400).json({ error: 'Projeto não encontrado. Verifique o projetoId.' });
+        }
+      }
+  
       const newDiscente = await prisma.discentes.create({
-          data: {
-              matricula,
-              nome,
-              cpf,
-              lates,
-              date_born: new Date(date_born),
-              projetoId,
-              tamanho_camisa,
-              contato,
-              bolsista,
-          },
+        data: {
+          matricula,
+          nome,
+          cpf,
+          lates,
+          date_born: new Date(date_born),
+          projetoId: projetoId || null, // Define projetoId como null se não for fornecido
+          tamanho_camisa,
+          contato,
+          bolsista,
+        },
       });
+  
       res.status(201).json(newDiscente);
-  } catch (error) {
-      res.status(500).json({ error: 'Failed to create discente' });
-  }
-};
+  
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'An unknown error occurred' });
+      }
+    }
+  };  
+  
 
 export const updateDiscente = async (req: Request, res: Response) => {
   const { id } = req.params;
