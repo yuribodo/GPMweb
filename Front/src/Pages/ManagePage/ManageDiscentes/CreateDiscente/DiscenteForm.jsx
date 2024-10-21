@@ -51,7 +51,7 @@ const DiscenteForm = ({ discente, index, handleChange, projetos }) => {
         <input
           id={`matricula-${index}`}
           name="matricula"
-          type="number"
+          type="text"
           value={discente.matricula}
           onChange={handleFieldChange}
           className={`w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500 
@@ -198,10 +198,10 @@ const DiscenteForm = ({ discente, index, handleChange, projetos }) => {
         <label htmlFor={`contato-${index}`} className="block text-sm text-gray-600">
           Contato
         </label>
-        <input
+        <ReactInputMask
           id={`contato-${index}`}
           name="contato"
-          type="text"
+          mask="(99) 99999-9999" 
           value={discente.contato}
           onChange={handleFieldChange}
           className={`w-full px-3 py-2 border rounded-md focus:ring-green-500 focus:border-green-500
