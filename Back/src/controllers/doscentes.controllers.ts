@@ -41,13 +41,13 @@ export const createDoscentes = async (req: Request, res: Response) => {
 
         let projetoIds: number[] = [];
         if (projetosId) {
-            // Divide os IDs de projetos em um array e converte para números
+            
             projetoIds = projetosId
                 .split(',')
                 .map((id: string) => parseInt(id.trim(), 10))
                 .filter((id: number) => !isNaN(id));
 
-            // Verifica se todos os projetos existem
+            
             const projetos = await prisma.projeto.findMany({
                 where: {
                     id: {
@@ -67,7 +67,7 @@ export const createDoscentes = async (req: Request, res: Response) => {
                 nome,
                 email,
                 contato,
-                projetosId: '0' ,
+                projetosId: projetosId, 
                 projetos: {
                     connect: projetoIds.map((id: number) => ({ id })), 
                 },
