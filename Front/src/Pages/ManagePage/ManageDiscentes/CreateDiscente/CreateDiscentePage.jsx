@@ -39,7 +39,7 @@ const CreateDiscentePage = () => {
     setDiscente((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : 
-              name === 'matricula' ? (value === '' ? '' : parseInt(value, 10)) : 
+              name === 'matricula' ? value : 
               value
     }));
   };
@@ -62,6 +62,10 @@ const CreateDiscentePage = () => {
     return true;
   };
 
+  const cleanContactNumber = (value) => {
+    return value.replace(/\D/g, '');  // Remove qualquer coisa que não seja número
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError('');
@@ -77,12 +81,20 @@ const CreateDiscentePage = () => {
       setSubmitError('Por favor, insira uma data de nascimento válida.');
       return;
     }
+
+    // Remover pontos e traços do CPF
+    const formattedCPF = discente.cpf.replace(/[.-]/g, '');
+
+    // Remover caracteres não numéricos do contato
+    const formattedContact = cleanContactNumber(discente.contato);
   
     setIsSubmitting(true);
   
     try {
       const formattedDiscente = {
         ...discente,
+        cpf: formattedCPF,
+        contato: formattedContact,
         date_born: new Date(discente.date_born).toISOString().slice(0, 10), // Ensure it's in ISO format
         projetoId: parseInt(discente.projetoId, 10)
       };
