@@ -27,25 +27,63 @@ export const getDoscentesById = async (req: Request, res: Response) => {
 };
 
 export const createDoscentes = async (req: Request, res: Response) => {
-    const { siape, nome, email, contato } = req.body;
+    const { siape, nome, email, contato, projetosId } = req.body;
     try {
+
+
+        const existingDosente = await prisma.doscentes.findUnique({
+            where: { siape: siape },
+        });
+
+        if (existingDosente) {
+            return res.status(400).json({ error: 'Um docente com esse siape já existe.' });
+        }
+
+        let projetoIds: number[] = [];
+        if (projetosId) {
+            // Divide os IDs de projetos em um array e converte para números
+            projetoIds = projetosId
+                .split(',')
+                .map((id: string) => parseInt(id.trim(), 10))
+                .filter((id: number) => !isNaN(id));
+
+            // Verifica se todos os projetos existem
+            const projetos = await prisma.projeto.findMany({
+                where: {
+                    id: {
+                        in: projetoIds,
+                    },
+                },
+            });
+
+            if (projetos.length !== projetoIds.length) {
+                return res.status(400).json({ error: 'Um ou mais projetos não foram encontrados. Verifique os projetoIds.' });
+            }
+        }
+
         const newDoscentes = await prisma.doscentes.create({
             data: {
                 siape,
                 nome,
                 email,
                 contato,
+                projetosId: projetosId, 
+                projetos: {
+                    connect: projetoIds.map((id: number) => ({ id })), 
+                },
             },
         });
         res.status(201).json(newDoscentes);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to create doscente' });
+        console.error('Erro ao criar docente:', error); 
+        res.status(500).json({ error: 'Falha ao criar docente' });
     }
 };
 
+
 export const updateDoscentes = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { siape, nome, email, contato } = req.body;
+    const { siape, nome, email, contato, projetosId } = req.body;
     try {
         const updatedDoscentes = await prisma.doscentes.update({
             where: { id: Number(id) },
@@ -54,6 +92,7 @@ export const updateDoscentes = async (req: Request, res: Response) => {
                 nome,
                 email,
                 contato,
+                projetosId,
             },
         });
         res.json(updatedDoscentes);

@@ -31,6 +31,7 @@ model Doscentes {
   id        Int       @id @default(autoincrement())
   siape     Int       @unique
   nome      String
+  projetosId String
   projetos  Projeto[] 
   email     String    @unique
   contato   String
