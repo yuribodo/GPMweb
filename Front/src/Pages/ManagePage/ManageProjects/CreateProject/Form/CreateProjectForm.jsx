@@ -174,34 +174,7 @@ const CreateProjectForm = () => {
           </div>
 
           
-          <div>
-            <h3 className="text-xl font-bold text-gray-900">Discentes</h3>
-            {formData.discentes.map((discente, index) => (
-              <DiscenteForm key={index} discente={discente} index={index} handleChange={handleChange} />
-            ))}
-            <button 
-              type="button" 
-              onClick={addDiscente} 
-              className="mt-2 text-green-500 hover:text-green-600"
-            >
-              + Adicionar Discente
-            </button>
-          </div>
-
-         
-          <div>
-            <h3 className="text-xl font-bold text-gray-900">Docentes</h3>
-            {formData.doscentes.map((docente, index) => (
-              <DocenteForm key={index} docente={docente} index={index} handleChange={handleChange} />
-            ))}
-            <button 
-              type="button" 
-              onClick={addDocente} 
-              className="mt-2 text-green-500 hover:text-green-600"
-            >
-              + Adicionar Docente
-            </button>
-          </div>
+          
 
           
           <motion.button
