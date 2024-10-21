@@ -1,103 +1,121 @@
-import React, { useState } from 'react';
-import { AlertCircle, Save, Plus, Trash2, ArrowLeft } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { AlertCircle, Save, ArrowLeft } from 'lucide-react';
 import DocenteForm from './DocenteForm';
+import axios from 'axios';
 
 const CreateDocentePage = () => {
-  const [docentes, setDocentes] = useState([{
+  const [docente, setDocente] = useState({
     siape: '',
     nome: '',
     email: '',
-    contato: ''
-  }]);
+    contato: '',
+    projetos: []
+  });
   
+  const [projetos, setProjetos] = useState([]);
   const [submitError, setSubmitError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleChange = (e, index, type) => {
-    const { name, value } = e.target;
-    const newDocentes = [...docentes];
-    newDocentes[index] = {
-      ...newDocentes[index],
-      [name]: value
-    };
-    setDocentes(newDocentes);
-  };
+  const api = import.meta.env.VITE_API_LINK;
 
-  const addDocente = () => {
-    setDocentes([
-      ...docentes,
-      {
-        siape: '',
-        nome: '',
-        email: '',
-        contato: ''
+  useEffect(() => {
+    const fetchProjetos = async () => {
+      try {
+        const response = await axios.get(`${api}/projetos`);
+        setProjetos(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar projetos:', error);
       }
-    ]);
-  };
+    };
+    fetchProjetos();
+  }, []);
 
-  const removeDocente = (index) => {
-    if (docentes.length === 1) {
-      return; 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'projetos') {
+      // Handle multiple select for projetos
+      const selectedOptions = Array.from(e.target.selectedOptions, option => parseInt(option.value));
+      setDocente(prev => ({
+        ...prev,
+        projetos: selectedOptions
+      }));
+    } else {
+      setDocente(prev => ({
+        ...prev,
+        [name]: value
+      }));
     }
-    const newDocentes = docentes.filter((_, i) => i !== index);
-    setDocentes(newDocentes);
   };
 
   const validateForm = () => {
-    for (const docente of docentes) {
-      if (!docente.siape || !docente.nome || !docente.email) {
-        return false;
-      }
+    if (!docente.siape || !docente.nome || !docente.email) {
+      return false;
     }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(docente.email)) {
+      return false;
+    }
+
+    if (docente.siape.toString().length < 5) {
+      return false;
+    }
+
     return true;
+  };
+
+  const cleanContactNumber = (value) => {
+    return value.replace(/\D/g, '');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError('');
-
+    setSuccessMessage('');
+  
     if (!validateForm()) {
-      setSubmitError('Por favor, preencha todos os campos obrigatórios.');
+      setSubmitError('Por favor, preencha todos os campos obrigatórios corretamente.');
       return;
     }
-
+  
     setIsSubmitting(true);
-
+  
     try {
-      // Aqui você implementa a chamada à API
-      console.log('Dados a serem enviados:', docentes);
-      
-      
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      
-      setDocentes([{
+      const formattedDocente = {
+        ...docente,
+        siape: parseInt(docente.siape, 10),
+        contato: cleanContactNumber(docente.contato)
+      };
+
+      console.log('Dados do Docente a serem enviados:', formattedDocente);
+  
+      const response = await axios.post(`${api}/doscentes`, formattedDocente);
+  
+      // Reset form after successful submission
+      setDocente({
         siape: '',
         nome: '',
         email: '',
-        contato: ''
-      }]);
-      
-      
-      alert('Docente(s) cadastrado(s) com sucesso!');
+        contato: '',
+        projetos: []
+      });
+  
+      setSuccessMessage('Docente cadastrado com sucesso!');
       
     } catch (error) {
-      setSubmitError('Erro ao cadastrar docente(s). Por favor, tente novamente.');
+      console.error('Erro ao enviar dados para a API:', error);
+      setSubmitError('Erro ao cadastrar docente. Por favor, tente novamente.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleBack = () => {
-    window.history.back();
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
-      
       <div className="container mx-auto pt-4 px-4">
         <button
-          onClick={handleBack}
+          onClick={() => window.history.back()}
           className="flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-4 py-2"
         >
           <ArrowLeft className="h-5 w-5" />
@@ -105,7 +123,6 @@ const CreateDocentePage = () => {
         </button>
       </div>
 
-      
       <div className="container mx-auto px-4 pb-6 max-w-3xl">
         <div className="bg-white rounded-lg shadow-md">
           <div className="p-6 border-b border-gray-200">
@@ -121,36 +138,39 @@ const CreateDocentePage = () => {
                   <p>{submitError}</p>
                 </div>
               )}
-
-              {docentes.map((docente, index) => (
-                <div key={index} className="relative">
-                  <DocenteForm
-                    docente={docente}
-                    index={index}
-                    handleChange={handleChange}
-                  />
-                  {docentes.length > 1 && (
-                    <button
-                      type="button"
-                      className="absolute top-2 right-2 p-2 text-red-600 hover:text-red-800"
-                      onClick={() => removeDocente(index)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  )}
+              
+              {successMessage && (
+                <div className="bg-green-50 border border-green-200 rounded-md p-4 flex items-center gap-2 text-green-700">
+                  <p>{successMessage}</p>
                 </div>
-              ))}
+              )}
+
+              <DocenteForm
+                docente={docente}
+                handleChange={handleChange}
+              />
+
+              <div className="mb-4">
+                <label htmlFor="projetos" className="block text-sm font-medium text-gray-700">
+                  Projetos Associados
+                </label>
+                <select
+                  id="projetos"
+                  name="projetos"
+                  multiple
+                  value={docente.projetos}
+                  onChange={handleChange}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+                >
+                  {projetos.map((projeto) => (
+                    <option key={projeto.id} value={projeto.id}>
+                      {projeto.nome}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               <div className="flex gap-4">
-                <button
-                  type="button"
-                  onClick={addDocente}
-                  className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
-                >
-                  <Plus className="h-4 w-4" />
-                  Adicionar Docente
-                </button>
-
                 <button
                   type="submit"
                   className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
