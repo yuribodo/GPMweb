@@ -15,7 +15,7 @@ datasource db {
 
 model Discentes {
   id             Int      @id @default(autoincrement())
-  matricula      BigInt      @unique
+  matricula      String      @unique
   nome           String
   cpf            String
   lates          String
