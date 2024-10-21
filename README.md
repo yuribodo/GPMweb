@@ -95,7 +95,7 @@ Make sure to replace placeholders with your actual configuration values.
 - **To run the frontend**:
 
   ```bash
-  npm run start-frontend
+  npm run dev
   ```
 
   This starts the React application on `http://localhost:5173` (or another available port).
