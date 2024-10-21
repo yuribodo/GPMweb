@@ -67,7 +67,7 @@ export const createDoscentes = async (req: Request, res: Response) => {
                 nome,
                 email,
                 contato,
-                projetosId: projetosId, 
+                projetosId: '0' ,
                 projetos: {
                     connect: projetoIds.map((id: number) => ({ id })), 
                 },
