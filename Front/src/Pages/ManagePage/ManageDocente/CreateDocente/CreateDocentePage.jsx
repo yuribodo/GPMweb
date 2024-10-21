@@ -34,7 +34,7 @@ const CreateDocentePage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'projetos') {
-      // Handle multiple select for projetos
+      
       const selectedOptions = Array.from(e.target.selectedOptions, option => parseInt(option.value));
       setDocente(prev => ({
         ...prev,
@@ -75,41 +75,43 @@ const CreateDocentePage = () => {
     setSuccessMessage('');
   
     if (!validateForm()) {
-      setSubmitError('Por favor, preencha todos os campos obrigatórios corretamente.');
-      return;
+        setSubmitError('Por favor, preencha todos os campos obrigatórios corretamente.');
+        return;
     }
   
     setIsSubmitting(true);
   
     try {
-      const formattedDocente = {
-        ...docente,
-        siape: parseInt(docente.siape, 10),
-        contato: cleanContactNumber(docente.contato)
-      };
+        const formattedDocente = {
+            siape: parseInt(docente.siape, 10),
+            nome: docente.nome,
+            email: docente.email,
+            contato: cleanContactNumber(docente.contato),
+            projetosId: docente.projetos.length > 0 ? String(docente.projetos[0]) : '0' 
+        };
 
-      console.log('Dados do Docente a serem enviados:', formattedDocente);
+        console.log('Dados do Docente a serem enviados:', formattedDocente);
   
-      const response = await axios.post(`${api}/doscentes`, formattedDocente);
+        const response = await axios.post(`${api}/doscentes`, formattedDocente);
   
-      // Reset form after successful submission
-      setDocente({
-        siape: '',
-        nome: '',
-        email: '',
-        contato: '',
-        projetos: []
-      });
+        
+        setDocente({
+            siape: '',
+            nome: '',
+            email: '',
+            contato: '',
+            projetos: []
+        });
   
-      setSuccessMessage('Docente cadastrado com sucesso!');
+        setSuccessMessage('Docente cadastrado com sucesso!');
       
     } catch (error) {
-      console.error('Erro ao enviar dados para a API:', error);
-      setSubmitError('Erro ao cadastrar docente. Por favor, tente novamente.');
+        console.error('Erro ao enviar dados para a API:', error);
+        setSubmitError('Erro ao cadastrar docente. Por favor, tente novamente.');
     } finally {
-      setIsSubmitting(false);
+        setIsSubmitting(false);
     }
-  };
+};
 
   return (
     <div className="min-h-screen bg-gray-50">

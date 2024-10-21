@@ -30,7 +30,7 @@ const DocenteForm = ({ docente, handleChange, projetos }) => {
       [name]: error
     }));
 
-    handleChange(e);  // Envia a alteração para o componente pai
+    handleChange(e); 
   };
 
   const handleProjetoToggle = (projetoId) => {
