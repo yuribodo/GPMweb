@@ -27,7 +27,10 @@ export const getProjetoById = async (req: Request, res: Response) => {
 };
 
 export const createProjeto = async (req: Request, res: Response) => {
-    const { titulo_projeto, edital, area, objetivo, metas } = req.body;
+    const { titulo_projeto, edital, area, objetivo, metas, discentes, docentes } = req.body;
+    
+    console.log('Dados recebidos:', { titulo_projeto, edital, area, objetivo, metas, discentes, docentes });
+
     try {
         const newProjeto = await prisma.projeto.create({
             data: {
@@ -36,11 +39,31 @@ export const createProjeto = async (req: Request, res: Response) => {
                 area,
                 objetivo,
                 metas,
+                discentes: {
+                    connect: discentes.map((discente: { matricula: string }) => ({
+                        matricula: discente.matricula
+                    }))
+                },
+                doscentes: {
+                    connect: docentes.map((docente: { siape: string }) => ({
+                        siape: docente.siape
+                    }))
+                }
             },
+            include: {
+                discentes: true,
+                doscentes: true
+            }
         });
+
+        console.log('Projeto criado:', newProjeto);
         res.status(201).json(newProjeto);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to create projeto' });
+        console.error('Erro ao criar projeto:', error);
+        res.status(500).json({ 
+            error: 'Failed to create projeto',
+            details: error instanceof Error ? error.message : 'Unknown error'
+        });
     }
 };
 
