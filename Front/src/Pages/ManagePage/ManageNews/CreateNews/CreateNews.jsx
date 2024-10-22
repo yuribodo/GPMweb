@@ -13,7 +13,14 @@ const CreateNews = () => {
   const api = import.meta.env.VITE_API_LINK;
 
   const handleChange = (e) => {
-    setNews({ ...news, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Verifica se o campo alterado é o 'projetoId', se for converte para número
+    if (name === 'projetoId') {
+      setNews({ ...news, [name]: parseInt(value, 10) || '' });
+    } else {
+      setNews({ ...news, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -33,28 +40,23 @@ const CreateNews = () => {
   };
 
   return (
-    
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="flex flex-col items-center justify-center min-h-screen bg-gray-100"
     >
-     
-     <div className="w-full max-w-2xl bg-white rounded-lg shadow-md p-6">
-      <div className="flex items-center justify-center mb-6">
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md shadow-md hover:bg-blue-600 focus:outline-none transition-colors"
-        >
-          <FiArrowLeft className="mr-2" />
-          Voltar
-        </button>
-        <h2 className="flex-grow text-3xl font-bold text-center">Criar Nova Notícia</h2>
-      </div>
-      
-        
-        
+      <div className="w-full max-w-2xl bg-white rounded-lg shadow-md p-6">
+        <div className="flex items-center justify-center mb-6">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md shadow-md hover:bg-green-600 focus:outline-none transition-colors"
+          >
+            <FiArrowLeft className="mr-2" />
+            Voltar
+          </button>
+          <h2 className="flex-grow text-3xl font-bold text-center">Criar Nova Notícia</h2>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -66,7 +68,7 @@ const CreateNews = () => {
               value={news.titulo}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-green-200"
             />
           </div>
           <div>
@@ -77,7 +79,7 @@ const CreateNews = () => {
               value={news.tipo}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-green-200"
             >
               <option value="">Selecione o tipo</option>
               <option value="Notícia">Notícia</option>
@@ -94,19 +96,19 @@ const CreateNews = () => {
               value={news.link}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-green-200"
             />
           </div>
           <div>
             <label htmlFor="projetoId" className="block mb-2 text-sm font-medium text-gray-700">ID do Projeto</label>
             <input
-              type="text"
+              type="number"
               id="projetoId"
               name="projetoId"
               value={news.projetoId}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-green-200"
             />
           </div>
           <motion.button
@@ -114,7 +116,7 @@ const CreateNews = () => {
             disabled={isLoading}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full px-4 py-2 text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-700 disabled:bg-blue-300"
+            className="w-full px-4 py-2 text-white bg-green-600 rounded-md shadow-sm hover:bg-green-700 disabled:bg-green-300"
           >
             {isLoading ? 'Criando...' : 'Criar Notícia'}
           </motion.button>

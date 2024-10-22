@@ -61,7 +61,7 @@ const EditNews = () => {
       <div className="w-full max-w-2xl bg-white rounded-lg shadow-md p-6">
         <button 
           onClick={() => navigate(-1)} 
-          className="text-sm font-medium text-indigo-600 hover:text-indigo-500 mb-4"
+          className="text-sm font-medium text-green-600 hover:text-green-500 mb-4"
         >
           &larr; Voltar
         </button>
@@ -76,7 +76,7 @@ const EditNews = () => {
               value={news.titulo}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
             />
           </div>
           <div className="space-y-2">
@@ -87,7 +87,7 @@ const EditNews = () => {
               value={news.tipo}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
             >
               <option value="">Selecione o tipo</option>
               <option value="noticia">Notícia</option>
@@ -104,7 +104,7 @@ const EditNews = () => {
               value={news.link}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
             />
           </div>
           <div className="space-y-2">
@@ -116,12 +116,12 @@ const EditNews = () => {
               value={news.projetoId}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
             />
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           >
             Atualizar Notícia
           </button>
