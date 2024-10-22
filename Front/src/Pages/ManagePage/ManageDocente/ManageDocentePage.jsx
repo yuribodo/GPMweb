@@ -25,10 +25,10 @@ const ManageDocentes = () => {
         const response = await axios.get(`${api}/doscentes`);
         setDocentes(response.data);
         setFilteredDocentes(response.data);
-        setLoading(false);
       } catch (error) {
         console.error('Erro ao buscar docentes:', error);
         setError('Falha ao carregar os docentes. Por favor, tente novamente mais tarde.');
+      } finally {
         setLoading(false);
       }
     };
@@ -136,7 +136,7 @@ const ManageDocentes = () => {
                       <td className="px-4 py-2">{docente.nome}</td>
                       <td className="px-4 py-2">{docente.email}</td>
                       <td className="px-4 py-2">{docente.contato}</td>
-                      <td className="px-4 py-2 text-center">{docente.projetos.length}</td>
+                      <td className="px-4 py-2 text-center">{docente.projetos?.length || 0}</td>
                       <td className="px-4 py-2">
                         <div className="flex justify-center space-x-2">
                           <motion.button
@@ -164,7 +164,7 @@ const ManageDocentes = () => {
             </div>
 
             <div className="mt-4 flex justify-center">
-              {[...Array(Math.ceil(filteredDocentes.length / docentesPerPage))].map((_, index) => (
+              {[...Array(Math.ceil((filteredDocentes.length || 0) / docentesPerPage))].map((_, index) => (
                 <button
                   key={index + 1}
                   onClick={() => paginate(index + 1)}

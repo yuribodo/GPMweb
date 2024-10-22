@@ -166,7 +166,7 @@ const CreateDocentePage = () => {
                 >
                   {projetos.map((projeto) => (
                     <option key={projeto.id} value={projeto.id}>
-                      {projeto.nome}
+                      {projeto.titulo_projeto}
                     </option>
                   ))}
                 </select>

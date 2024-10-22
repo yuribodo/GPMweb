@@ -1,4 +1,3 @@
-// DiscenteForm.jsx
 import React, { useState } from 'react';
 import ReactInputMask from 'react-input-mask';
 
@@ -159,7 +158,7 @@ const DiscenteForm = ({ discente, index, handleChange, projetos }) => {
           <option value="">Selecione um projeto</option>
           {projetos.map(projeto => (
             <option key={projeto.id} value={projeto.id}>
-              {projeto.nome}
+              {projeto.titulo_projeto}
             </option>
           ))}
         </select>
