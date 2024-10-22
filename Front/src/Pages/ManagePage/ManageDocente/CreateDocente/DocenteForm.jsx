@@ -53,7 +53,7 @@ const DocenteForm = ({ docente, handleChange, projetos }) => {
 
   return (
     <div className="space-y-6 bg-gray-50 p-4 rounded-md mb-4 border border-gray-200">
-      {/* Basic Information Section */}
+      
       <div className="space-y-4">
         <h3 className="text-lg font-medium text-gray-900">Informações Básicas</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

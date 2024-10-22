@@ -21,7 +21,7 @@ model Discentes {
   lates          String
   date_born      DateTime
   projetoId      Int      
-  projeto        Projeto  @relation(fields: [projetoId], references: [id])
+  projeto        Projeto  @relation(fields: [projetoId], references: [id], onDelete: Cascade)
   tamanho_camisa String
   contato        String
   bolsista       Boolean
@@ -55,6 +55,6 @@ model Noticia {
   tipo      String
   link      String
   projetoId Int    
-  projeto   Projeto @relation(fields: [projetoId], references: [id])
+  projeto   Projeto @relation(fields: [projetoId], references: [id], onDelete: Cascade)
 }
 

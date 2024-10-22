@@ -214,6 +214,7 @@ const ManageProjects = () => {
 
       {showModal && (
         <DeleteConfirmationModal
+          showModal={showModal}
           onCancel={() => setShowModal(false)}
           onConfirm={handleConfirmDelete}
         />
