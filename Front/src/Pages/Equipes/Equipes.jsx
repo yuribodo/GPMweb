@@ -44,7 +44,7 @@ const Equipes = () => {
     setCurrentPage(1);
   }, [searchTerm, projetos]);
 
-  // Cálculo da paginação
+  
   const indexOfLastProjeto = currentPage * projetosPerPage;
   const indexOfFirstProjeto = indexOfLastProjeto - projetosPerPage;
   const currentProjetos = filteredProjetos.slice(indexOfFirstProjeto, indexOfLastProjeto);
@@ -90,7 +90,7 @@ const Equipes = () => {
         <Navbar />
         <main className="flex-grow px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16 flex justify-center items-center">
           <motion.div
-            className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"
+            className="w-16 h-16 border-4 border-green-500 border-t-transparent border-solid rounded-full animate-spin"
             initial={{ rotate: 0 }}
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 1 }}
@@ -235,7 +235,7 @@ const Equipes = () => {
           ))}
         </motion.section>
 
-        {/* Paginação */}
+        
         {filteredProjetos.length > projetosPerPage && (
           <div className="flex justify-center items-center gap-4 mt-8">
             <button
