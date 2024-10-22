@@ -90,9 +90,34 @@ export const updateProjeto = async (req: Request, res: Response) => {
 export const deleteProjeto = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
-        await prisma.projeto.delete({ where: { id: Number(id) } });
+        
+        await prisma.discentes.deleteMany({
+            where: { projetoId: Number(id) }
+        });
+
+        
+        await prisma.noticia.deleteMany({
+            where: { projetoId: Number(id) }
+        });
+
+        
+        await prisma.projeto.update({
+            where: { id: Number(id) },
+            data: {
+                doscentes: {
+                    set: [] 
+                }
+            }
+        });
+
+        
+        await prisma.projeto.delete({
+            where: { id: Number(id) }
+        });
+
         res.status(204).send();
     } catch (error) {
-        res.status(500).json({ error: 'Failed to delete projeto' });
+        console.error('Erro ao deletar projeto:', error);
+        res.status(500).json({ error: 'Falha ao deletar projeto' });
     }
 };

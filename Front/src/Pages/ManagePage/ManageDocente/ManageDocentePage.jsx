@@ -53,7 +53,7 @@ const ManageDocentes = () => {
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`${api}/docentes/${docenteToDelete}`);
+      await axios.delete(`${api}/doscentes/${docenteToDelete}`);
       setDocentes(docentes.filter((docente) => docente.id !== docenteToDelete));
       setShowModal(false);
     } catch (error) {

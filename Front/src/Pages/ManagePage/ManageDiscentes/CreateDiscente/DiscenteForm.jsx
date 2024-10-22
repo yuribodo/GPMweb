@@ -41,7 +41,7 @@ const DiscenteForm = ({ discente, index, handleChange, projetos }) => {
 
   return (
     <div className="space-y-3 bg-gray-50 p-4 rounded-md mb-4 border border-gray-200">
-      <h4 className="font-semibold text-gray-800">Discente {index + 1}</h4>
+      <h4 className="font-semibold text-gray-800">Discente</h4>
       
       <div>
         <label htmlFor={`matricula-${index}`} className="block text-sm text-gray-600">
