@@ -167,7 +167,7 @@ const ManageProjects = () => {
               </table>
             </div>
 
-            {/* Mobile layout */}
+            
             <div className="block sm:hidden">
               {currentProjects.map((project) => (
                 <div key={project.id} className="border rounded-lg p-4 mb-4 bg-white shadow-md">

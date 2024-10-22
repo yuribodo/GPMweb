@@ -165,7 +165,7 @@ const ManageNews = () => {
               </table>
             </div>
 
-            {/* Exibição em cartão para dispositivos móveis */}
+            
             <div className="md:hidden">
               {currentNews.map((n) => (
                 <div key={n.id} className="border p-4 rounded-lg mb-4 bg-white shadow">

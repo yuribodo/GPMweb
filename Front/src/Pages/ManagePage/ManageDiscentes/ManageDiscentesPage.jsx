@@ -129,7 +129,7 @@ const ManageDiscentes = () => {
                 <tbody>
                   {currentDiscentes.map((discente) => (
                     <tr key={discente.id} className="block sm:table-row border-b">
-                      {/* Mobile layout */}
+                      
                       <td className="block sm:table-cell px-4 py-2">
                         <div className="flex flex-col sm:hidden mb-2">
                           <span className="font-bold">Matrícula:</span>
@@ -158,7 +158,7 @@ const ManageDiscentes = () => {
                           </div>
                         </div>
                         
-                        {/* Desktop layout */}
+                        
                         <span className="hidden sm:block">{discente.matricula}</span>
                       </td>
                       <td className="hidden sm:table-cell px-4 py-2">{discente.nome}</td>
