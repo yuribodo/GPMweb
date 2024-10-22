@@ -4,6 +4,7 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import Navbar from '../../../Components/Navbar';
 import Footer from '../../../Components/Footer';
+import backgroundImage from '../../../../assets/projetos.jpeg'
 
 const api = import.meta.env.VITE_API_LINK;
 
@@ -31,7 +32,7 @@ const SaibaMais = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="flex flex-grow flex-col items-center px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16"> 
+      <main className="flex flex-grow flex-col items-center px-4 sm:px-8 md:px-12 lg:px-16 py-12 mt-16">
         <motion.h1
           className="font-bold text-2xl text-center"
           initial={{ opacity: 0, y: -20 }}
@@ -41,7 +42,12 @@ const SaibaMais = () => {
           Projeto: {project.titulo_projeto}
         </motion.h1>
         <motion.div
-          className="flex justify-center items-center bg-slate-500 h-[40vh] w-[50vw] mt-6"
+          className="flex justify-center items-center h-[40vh] w-[50vw] mt-6"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,  // Use a imagem importada
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8 }}

@@ -113,7 +113,7 @@ const Projetos = () => {
         >
           {loading ? (
             <div className="flex justify-center items-center col-span-full">
-              <ClipLoader color="#4A90E2" size={50} />
+              <ClipLoader color="green" size={50} />
             </div>
           ) : currentProjects.length > 0 ? (
             currentProjects.map((project) => (
@@ -129,7 +129,7 @@ const Projetos = () => {
           )}
         </motion.section>
 
-        {/* Paginação */}
+        
         {!loading && filteredProjects.length > projectsPerPage && (
           <div className="flex justify-center items-center gap-4 mt-8">
             <button

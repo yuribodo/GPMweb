@@ -112,7 +112,7 @@ const Noticias = () => {
         >
           {loading ? (
             <div className="flex justify-center items-center col-span-full">
-              <ClipLoader color="#4A90E2" size={50} />
+              <ClipLoader color="green" size={50} />
             </div>
           ) : currentNoticias.length > 0 ? (
             currentNoticias.map((noticia) => (
@@ -126,7 +126,7 @@ const Noticias = () => {
                 <div className="p-6">
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">{noticia.titulo}</h2>
                   <p className="text-gray-600">{noticia.resumo}</p>
-                  <a href="https://portal.ifro.edu.br/calama/noticias/" className="text-blue-500 hover:underline mt-4 inline-block">
+                  <a href="https://portal.ifro.edu.br/calama/noticias/" className="text-green-500 hover:underline mt-4 inline-block">
                     Leia mais
                   </a>
                 </div>

@@ -34,7 +34,7 @@ const Membros = () => {
         <Navbar />
         <main className="flex-grow flex justify-center items-center">
           <motion.div
-            className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"
+            className="w-16 h-16 border-4 border-green-500 border-t-transparent border-solid rounded-full animate-spin"
             initial={{ rotate: 0 }}
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 1 }}

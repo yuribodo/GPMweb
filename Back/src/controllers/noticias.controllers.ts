@@ -28,6 +28,8 @@ export const getNoticiaById = async (req: Request, res: Response) => {
 
 export const createNoticia = async (req: Request, res: Response) => {
     const { titulo, tipo, link, projetoId } = req.body;
+    
+    
     try {
         const newNoticia = await prisma.noticia.create({
             data: {
@@ -39,6 +41,7 @@ export const createNoticia = async (req: Request, res: Response) => {
         });
         res.status(201).json(newNoticia);
     } catch (error) {
+        console.error("Erro ao criar notícia:", error); // Log do erro
         res.status(500).json({ error: 'Failed to create noticia' });
     }
 };
