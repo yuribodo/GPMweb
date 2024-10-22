@@ -74,12 +74,10 @@ const ManageProjects = () => {
     setSearchTerm(event.target.value);
   };
 
-  
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
   const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
 
-  
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
@@ -99,15 +97,15 @@ const ManageProjects = () => {
 
   return (
     <motion.div 
-      className="flex flex-col min-h-screen items-center justify-center bg-gray-100 p-8"
+      className="flex flex-col min-h-screen items-center justify-center bg-gray-100 p-4 sm:p-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <div className="w-full max-w-4xl bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">Gerenciar Projetos</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-center mb-4 sm:mb-6">Gerenciar Projetos</h2>
         
-        <div className="flex justify-between mb-6">
+        <div className="flex flex-col sm:flex-row justify-between mb-4 sm:mb-6 space-y-2 sm:space-y-0">
           <motion.button
             onClick={handleCreate}
             className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md shadow-sm hover:bg-green-700 focus:outline-none"
@@ -119,7 +117,7 @@ const ManageProjects = () => {
           <input
             type="text"
             placeholder="Buscar projetos..."
-            className="px-4 py-2 border rounded-md"
+            className="px-4 py-2 border rounded-md w-full sm:w-auto"
             value={searchTerm}
             onChange={handleSearch}
           />
@@ -127,15 +125,16 @@ const ManageProjects = () => {
 
         {currentProjects.length > 0 ? (
           <>
-            <table className="w-full table-auto">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2">Título</th>
-                  <th className="px-4 py-2">Edital</th>
-                  <th className="px-4 py-2">Ações</th>
-                </tr>
-              </thead>
-              <tbody>
+            <div className="hidden sm:block">
+              <table className="w-full table-auto">
+                <thead>
+                  <tr>
+                    <th className="px-4 py-2">Título</th>
+                    <th className="px-4 py-2">Edital</th>
+                    <th className="px-4 py-2">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
                   {currentProjects.map((project) => (
                     <tr key={project.id}>
                       <td className="border px-4 py-2 max-w-[400px] truncate" title={project.titulo_projeto}>
@@ -165,7 +164,37 @@ const ManageProjects = () => {
                     </tr>
                   ))}
                 </tbody>
-            </table>
+              </table>
+            </div>
+
+            
+            <div className="block sm:hidden">
+              {currentProjects.map((project) => (
+                <div key={project.id} className="border rounded-lg p-4 mb-4 bg-white shadow-md">
+                  <h3 className="font-bold text-lg">{project.titulo_projeto}</h3>
+                  <p className="text-sm text-gray-600">Edital: {project.edital}</p>
+                  <div className="mt-4 flex justify-center space-x-2">
+                    <motion.button
+                      onClick={() => handleEdit(project.id)}
+                      className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Editar
+                    </motion.button>
+                    <motion.button
+                      onClick={() => handleDeleteClick(project.id)}
+                      className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md shadow-sm hover:bg-red-700 focus:outline-none"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Deletar
+                    </motion.button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <div className="mt-4 flex justify-center">
               {[...Array(Math.ceil(filteredProjects.length / projectsPerPage)).keys()].map((number) => (
                 <button
@@ -179,15 +208,16 @@ const ManageProjects = () => {
             </div>
           </>
         ) : (
-          <p className="text-center">Nenhum projeto encontrado.</p>
+          <div className="text-center mt-4">Nenhum projeto encontrado.</div>
         )}
       </div>
 
-      <DeleteConfirmationModal
-        showModal={showModal}
-        onClose={() => setShowModal(false)}
-        onConfirm={handleConfirmDelete}
-      />
+      {showModal && (
+        <DeleteConfirmationModal
+          onCancel={() => setShowModal(false)}
+          onConfirm={handleConfirmDelete}
+        />
+      )}
     </motion.div>
   );
 };

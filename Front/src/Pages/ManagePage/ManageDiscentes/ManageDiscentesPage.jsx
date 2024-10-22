@@ -76,9 +76,9 @@ const ManageDiscentes = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) return (
-    <div className="flex flex-col min-h-screen items-center justify-center bg-gray-100 p-8">
+    <div className="flex flex-col min-h-screen items-center justify-center bg-gray-100 p-4 sm:p-8">
       <div className="w-full max-w-4xl bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">Gerenciar Discentes</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-center mb-6">Gerenciar Discentes</h2>
         <SkeletonLoader rows={5} />
       </div>
     </div>
@@ -88,18 +88,18 @@ const ManageDiscentes = () => {
 
   return (
     <motion.div 
-      className="flex flex-col min-h-screen items-center justify-center bg-gray-100 p-8"
+      className="flex flex-col min-h-screen items-center justify-center bg-gray-100 p-4 sm:p-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <div className="w-full max-w-4xl bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">Gerenciar Discentes</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-center mb-4 sm:mb-6">Gerenciar Discentes</h2>
         
-        <div className="flex justify-between mb-6">
+        <div className="flex flex-col sm:flex-row justify-between mb-4 sm:mb-6 space-y-2 sm:space-y-0 sm:space-x-4">
           <motion.button
             onClick={handleCreate}
-            className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700"
+            className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md shadow-sm hover:bg-green-700 focus:outline-none"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -108,7 +108,7 @@ const ManageDiscentes = () => {
           <input
             type="text"
             placeholder="Buscar por nome ou matrícula..."
-            className="px-4 py-2 border rounded-md"
+            className="px-4 py-2 border rounded-md w-full sm:w-auto"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -118,26 +118,53 @@ const ManageDiscentes = () => {
           <>
             <div className="overflow-x-auto">
               <table className="w-full table-auto">
-                <thead>
+                <thead className="hidden sm:table-header-group">
                   <tr className="bg-gray-50">
                     <th className="px-4 py-2">Matrícula</th>
                     <th className="px-4 py-2">Nome</th>
-                    
                     <th className="px-4 py-2">Bolsista</th>
                     <th className="px-4 py-2">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentDiscentes.map((discente) => (
-                    <tr key={discente.id} className="border-b">
-                      <td className="px-4 py-2 text-center">{discente.matricula}</td>
-                      <td className="px-4 py-2">{discente.nome}</td>
+                    <tr key={discente.id} className="block sm:table-row border-b">
                       
-                      <td className="px-4 py-2 text-center">
-                        {discente.bolsista ? 'Sim' : 'Não'}
+                      <td className="block sm:table-cell px-4 py-2">
+                        <div className="flex flex-col sm:hidden mb-2">
+                          <span className="font-bold">Matrícula:</span>
+                          <span>{discente.matricula}</span>
+                          <span className="font-bold mt-2">Nome:</span>
+                          <span>{discente.nome}</span>
+                          <span className="font-bold mt-2">Bolsista:</span>
+                          <span>{discente.bolsista ? 'Sim' : 'Não'}</span>
+                          <div className="flex gap-2 mt-4">
+                            <motion.button
+                              onClick={() => handleEdit(discente.id)}
+                              className="flex-1 px-3 py-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              Editar
+                            </motion.button>
+                            <motion.button
+                              onClick={() => handleDeleteClick(discente.id)}
+                              className="flex-1 px-3 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-700"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              Deletar
+                            </motion.button>
+                          </div>
+                        </div>
+                        
+                        
+                        <span className="hidden sm:block">{discente.matricula}</span>
                       </td>
-                      <td className="px-4 py-2">
-                        <div className="flex justify-center space-x-2">
+                      <td className="hidden sm:table-cell px-4 py-2">{discente.nome}</td>
+                      <td className="hidden sm:table-cell px-4 py-2 text-center">{discente.bolsista ? 'Sim' : 'Não'}</td>
+                      <td className="hidden sm:table-cell px-4 py-2">
+                        <div className="flex space-x-2">
                           <motion.button
                             onClick={() => handleEdit(discente.id)}
                             className="px-3 py-1 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600"
@@ -162,12 +189,12 @@ const ManageDiscentes = () => {
               </table>
             </div>
 
-            <div className="mt-4 flex justify-center">
+            <div className="mt-4 flex justify-center flex-wrap gap-2">
               {[...Array(Math.ceil(filteredDiscentes.length / discentesPerPage))].map((_, index) => (
                 <button
                   key={index + 1}
                   onClick={() => paginate(index + 1)}
-                  className={`mx-1 px-3 py-1 rounded ${
+                  className={`px-3 py-1 rounded ${
                     currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200'
                   }`}
                 >

@@ -3,53 +3,60 @@ import ManageProjects from './ManageProjects/ManageProjects';
 import ManageNews from './ManageNews/ManageNews';
 import ManageDiscentesPage from './ManageDiscentes/ManageDiscentesPage';
 import ManageDocentePage from './ManageDocente/ManageDocentePage';
+import { FaProjectDiagram, FaNewspaper, FaUserGraduate, FaChalkboardTeacher } from 'react-icons/fa';
 
 const ManagePage = () => {
   const [activeTab, setActiveTab] = useState('projects'); 
 
   return (
-    <div>
+    <div className="p-4">
       
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center mb-6 space-x-2 overflow-auto">
         <button
           onClick={() => setActiveTab('projects')}
-          className={`px-4 py-2 text-sm font-medium ${
+          className={`flex flex-col items-center justify-center px-4 py-2 text-sm font-medium ${
             activeTab === 'projects' ? 'text-white bg-green-600' : 'text-green-600 bg-white'
-          } rounded-md shadow-md mx-2`}
+          } rounded-full shadow-md w-12 h-12`}
         >
-          Gerenciar Projetos
+          <FaProjectDiagram size={20} />
+          <span className="text-xs mt-1 hidden sm:block">Projetos</span>
         </button>
         <button
           onClick={() => setActiveTab('news')}
-          className={`px-4 py-2 text-sm font-medium ${
+          className={`flex flex-col items-center justify-center px-4 py-2 text-sm font-medium ${
             activeTab === 'news' ? 'text-white bg-green-600' : 'text-green-600 bg-white'
-          } rounded-md shadow-md mx-2`}
+          } rounded-full shadow-md w-12 h-12`}
         >
-          Gerenciar Notícias
+          <FaNewspaper size={20} />
+          <span className="text-xs mt-1 hidden sm:block">Notícias</span>
         </button>
         <button
           onClick={() => setActiveTab('discentes')}
-          className={`px-4 py-2 text-sm font-medium ${
+          className={`flex flex-col items-center justify-center px-4 py-2 text-sm font-medium ${
             activeTab === 'discentes' ? 'text-white bg-green-600' : 'text-green-600 bg-white'
-          } rounded-md shadow-md mx-2`}
+          } rounded-full shadow-md w-12 h-12`}
         >
-          Gerenciar Discentes
+          <FaUserGraduate size={20} />
+          <span className="text-xs mt-1 hidden sm:block">Discentes</span>
         </button>
         <button
           onClick={() => setActiveTab('docentes')}
-          className={`px-4 py-2 text-sm font-medium ${
+          className={`flex flex-col items-center justify-center px-4 py-2 text-sm font-medium ${
             activeTab === 'docentes' ? 'text-white bg-green-600' : 'text-green-600 bg-white'
-          } rounded-md shadow-md mx-2`}
+          } rounded-full shadow-md w-12 h-12`}
         >
-          Gerenciar Docentes
+          <FaChalkboardTeacher size={20} />
+          <span className="text-xs mt-1 hidden sm:block">Docentes</span>
         </button>
       </div>
 
       
-      {activeTab === 'projects' && <ManageProjects />}
-      {activeTab === 'news' && <ManageNews />}
-      {activeTab === 'discentes' && <ManageDiscentesPage />}
-      {activeTab === 'docentes' && <ManageDocentePage />}
+      <div className="mt-4">
+        {activeTab === 'projects' && <ManageProjects />}
+        {activeTab === 'news' && <ManageNews />}
+        {activeTab === 'discentes' && <ManageDiscentesPage />}
+        {activeTab === 'docentes' && <ManageDocentePage />}
+      </div>
     </div>
   );
 };
