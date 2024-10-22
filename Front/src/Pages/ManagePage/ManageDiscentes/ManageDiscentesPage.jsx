@@ -62,7 +62,7 @@ const ManageDiscentes = () => {
   };
 
   const handleEdit = (id) => {
-    navigate(`/manage/edit-discente/${id}`);
+    navigate(`/manage/edit-discentes/${id}`);
   };
 
   const handleCreate = () => {
