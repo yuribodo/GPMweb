@@ -63,7 +63,7 @@ const CreateDiscentePage = () => {
   };
 
   const cleanContactNumber = (value) => {
-    return value.replace(/\D/g, '');  // Remove qualquer coisa que não seja número
+    return value.replace(/\D/g, '');  
   };
 
   const handleSubmit = async (e) => {
@@ -75,17 +75,17 @@ const CreateDiscentePage = () => {
       return;
     }
   
-    // Check for valid date_born
+    
     const date = new Date(discente.date_born);
     if (isNaN(date.getTime())) {
       setSubmitError('Por favor, insira uma data de nascimento válida.');
       return;
     }
 
-    // Remover pontos e traços do CPF
+    
     const formattedCPF = discente.cpf.replace(/[.-]/g, '');
 
-    // Remover caracteres não numéricos do contato
+    
     const formattedContact = cleanContactNumber(discente.contato);
   
     setIsSubmitting(true);
@@ -95,16 +95,16 @@ const CreateDiscentePage = () => {
         ...discente,
         cpf: formattedCPF,
         contato: formattedContact,
-        date_born: new Date(discente.date_born).toISOString().slice(0, 10), // Ensure it's in ISO format
+        date_born: new Date(discente.date_born).toISOString().slice(0, 10), 
         projetoId: parseInt(discente.projetoId, 10)
       };
 
-      // Log the data being sent
+     
       console.log('Dados do Discente a serem enviados:', formattedDiscente);
   
       const response = await axios.post(`${api}/discentes`, formattedDiscente);
   
-      // Reset form after successful submission
+      
       setDiscente({
         matricula: '',
         nome: '',
