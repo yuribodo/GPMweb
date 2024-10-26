@@ -27,8 +27,8 @@ This application is dedicated to show project and members from **GPMecatronica**
 - **TailwindCSS**: A utility-first CSS framework packed with classes like `flex`, `pt-4`, `text-center` and more to style your websites without leaving your HTML.
 - **React-Router-Dom**: A routing library for React, enabling navigation among views.
 - **Framer Motion**: A library for adding animations to React components.
-- **react-icons**
-- **react-intersection-observer**
+- **react-icons**: Popular icons for React from multiple libraries.
+- **lucide-react**: Modern, customizable icons for React.
 
 ### Backend
 
@@ -37,7 +37,7 @@ This application is dedicated to show project and members from **GPMecatronica**
 - **TypeScript**: Brings static typing to JavaScript, ensuring a more predictable runtime behavior.
 - **PostgreSQL**: A powerful, open-source object-relational database system.
 - **Nodemon**: A utility that monitors for any changes in your source and automatically restarts your server.
-- **Typescript** 
+- **Typescript**:  A typed JavaScript superset for early error detection and enhanced code clarity.
 
 ## Installation
 
