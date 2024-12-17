@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -15,26 +9,26 @@ datasource db {
 
 model Discentes {
   id             Int      @id @default(autoincrement())
-  matricula      String      @unique
+  matricula      String   @unique
   nome           String
   cpf            String
   lates          String
   date_born      DateTime
-  projetoId      Int      
-  projeto        Projeto  @relation(fields: [projetoId], references: [id], onDelete: Cascade)
+  projetoId      Int
   tamanho_camisa String
   contato        String
   bolsista       Boolean
+  projeto        Projeto  @relation(fields: [projetoId], references: [id], onDelete: Cascade)
 }
 
 model Doscentes {
-  id        Int       @id @default(autoincrement())
-  siape     Int       @unique
-  nome      String
+  id         Int       @id @default(autoincrement())
+  siape      Int       @unique
+  nome       String
+  email      String    @unique
+  contato    String
   projetosId String
-  projetos  Projeto[] 
-  email     String    @unique
-  contato   String
+  projetos   Projeto[] @relation("DoscentesToProjeto")
 }
 
 model Projeto {
@@ -44,9 +38,9 @@ model Projeto {
   area           String
   objetivo       String
   metas          String
-  doscentes      Doscentes[] 
-  noticias       Noticia[]   
-  discentes      Discentes[] 
+  discentes      Discentes[]
+  noticias       Noticia[]
+  doscentes      Doscentes[] @relation("DoscentesToProjeto")
 }
 
 model Noticia {
@@ -54,7 +48,6 @@ model Noticia {
   titulo    String
   tipo      String
   link      String
-  projetoId Int    
+  projetoId Int
   projeto   Projeto @relation(fields: [projetoId], references: [id], onDelete: Cascade)
 }
-
