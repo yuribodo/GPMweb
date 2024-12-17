@@ -18,7 +18,7 @@ import {
   Award 
 } from 'lucide-react';
 
-// Dados mockados para seções adicionais
+
 const mockAdditionalData = {
   projectTrends: [
     { month: 'Jan', projects: 10 },
@@ -68,6 +68,53 @@ const mockAdditionalData = {
     }
   ]
 };
+
+const StatCardSkeleton = () => (
+  <div className="bg-white rounded-lg shadow p-6 animate-pulse">
+    <div className="flex items-center mb-2">
+      <div className="w-8 h-8 bg-gray-300 rounded-full mr-2"></div>
+      <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+    </div>
+    <div className="h-10 bg-gray-300 rounded mt-2 w-1/2 mx-auto"></div>
+  </div>
+);
+
+const AreaPerformanceCardSkeleton = () => (
+  <div className="bg-white rounded-lg shadow p-6 animate-pulse col-span-full lg:col-span-2">
+    <div className="h-6 bg-gray-300 rounded w-1/2 mb-4"></div>
+    <div className="grid grid-cols-3 gap-4">
+      {[1, 2, 3].map((item) => (
+        <div key={item} className="text-center">
+          <div className="bg-gray-300 rounded-full p-3 mx-auto w-16 h-16 mb-2"></div>
+          <div className="h-4 bg-gray-300 rounded w-2/3 mx-auto mb-2"></div>
+          <div className="h-3 bg-gray-300 rounded w-1/2 mx-auto"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const ProjectTrendsChartSkeleton = () => (
+  <div className="bg-white rounded-lg shadow p-6 animate-pulse col-span-full lg:col-span-2">
+    <div className="h-6 bg-gray-300 rounded w-1/2 mb-4"></div>
+    <div className="h-[300px] bg-gray-300 rounded"></div>
+  </div>
+);
+
+const RecentAchievementsCardSkeleton = () => (
+  <div className="bg-white rounded-lg shadow p-6 animate-pulse col-span-full">
+    <div className="h-6 bg-gray-300 rounded w-1/2 mb-4"></div>
+    {[1, 2, 3].map((item) => (
+      <div key={item} className="border-b py-3 flex items-center">
+        <div className="w-8 h-8 bg-gray-300 rounded-full mr-3"></div>
+        <div className="flex-grow">
+          <div className="h-4 bg-gray-300 rounded w-2/3 mb-2"></div>
+          <div className="h-3 bg-gray-300 rounded w-1/2"></div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
 
 const Relatorios = () => {
   const api = import.meta.env.VITE_API_LINK;
@@ -210,12 +257,22 @@ const Relatorios = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <motion.div
-          className="spinner w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-        />
+      <div className="p-6 bg-gray-100 min-h-screen">
+        <div className="text-3xl font-bold mb-8 text-gray-800 text-center">
+          Painel de Relatórios
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {[1, 2, 3, 4].map((item) => (
+            <StatCardSkeleton key={item} />
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <AreaPerformanceCardSkeleton />
+          <ProjectTrendsChartSkeleton />
+          <RecentAchievementsCardSkeleton />
+        </div>
       </div>
     );
   }
