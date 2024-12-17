@@ -25,6 +25,7 @@ import CreateDiscentePage from './Pages/ManagePage/ManageDiscentes/CreateDiscent
 import CreateDocentePage from './Pages/ManagePage/ManageDocente/CreateDocente/CreateDocentePage.jsx';
 import EditDiscentePage from './Pages/ManagePage/ManageDiscentes/EditDiscente/EditDiscentePage.jsx';
 import EditDocentePage from './Pages/ManagePage/ManageDocente/EditDocente/EditDocentePage.jsx';
+import Relatorios from './Pages/ManagePage/Relatorios/Relatorios.jsx';
 
 
 const router = createBrowserRouter([
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
   {
     path: "/manage/edit-docente/:id",  
     element: <EditDocentePage/>,
+  },
+  {
+    path: "/manage/relatorios",  
+    element: <Relatorios/>,
   },
 ]);
 
