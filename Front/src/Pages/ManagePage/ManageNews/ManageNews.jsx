@@ -15,7 +15,7 @@ const ManageNews = () => {
   const [newsToDelete, setNewsToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [newsPerPage] = useState(10);
+  const [newsPerPage] = useState(5);  // Show 5 news per section
 
   const api = import.meta.env.VITE_API_LINK;
 
@@ -42,7 +42,7 @@ const ManageNews = () => {
       n.descricao.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredNews(results);
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset to first page on search change
   }, [searchTerm, news]);
 
   const handleDeleteClick = (id) => {
@@ -74,12 +74,11 @@ const ManageNews = () => {
     setSearchTerm(event.target.value);
   };
 
-  
+  // Pagination logic
   const indexOfLastNews = currentPage * newsPerPage;
   const indexOfFirstNews = indexOfLastNews - newsPerPage;
   const currentNews = filteredNews.slice(indexOfFirstNews, indexOfLastNews);
 
-  
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
@@ -87,7 +86,7 @@ const ManageNews = () => {
       <div className="flex flex-col min-h-screen items-center justify-center bg-gray-100 p-8">
         <div className="w-full max-w-4xl bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold text-center mb-6">Gerenciar Notícias</h2>
-          <SkeletonLoader rows={10} />
+          <SkeletonLoader rows={5} />
         </div>
       </div>
     );
@@ -127,46 +126,8 @@ const ManageNews = () => {
 
         {currentNews.length > 0 ? (
           <>
-            <div className="hidden md:block">
-              <table className="w-full table-auto">
-                <thead>
-                  <tr>
-                    <th className="px-4 py-2">Título</th>
-                    <th className="px-4 py-2">Descrição</th>
-                    <th className="px-4 py-2">Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentNews.map((n) => (
-                    <tr key={n.id}>
-                      <td className="border px-4 py-2">{n.titulo}</td>
-                      <td className="border px-4 py-2">{n.descricao}</td>
-                      <td className="border px-4 py-2">
-                        <motion.button
-                          onClick={() => handleEdit(n.id)}
-                          className="mr-2 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          Editar
-                        </motion.button>
-                        <motion.button
-                          onClick={() => handleDeleteClick(n.id)}
-                          className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md shadow-sm hover:bg-red-700 focus:outline-none"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          Deletar
-                        </motion.button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            
-            <div className="md:hidden">
+            {/* Render each section with 5 news items */}
+            <div className="space-y-4">
               {currentNews.map((n) => (
                 <div key={n.id} className="border p-4 rounded-lg mb-4 bg-white shadow">
                   <h3 className="font-bold">{n.titulo}</h3>
@@ -193,6 +154,7 @@ const ManageNews = () => {
               ))}
             </div>
 
+            {/* Pagination */}
             <div className="mt-4 flex justify-center">
               {[...Array(Math.ceil(filteredNews.length / newsPerPage)).keys()].map((number) => (
                 <button
