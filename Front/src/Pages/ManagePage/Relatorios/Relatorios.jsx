@@ -3,6 +3,7 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 
 const Relatorios = () => {
+  const api = import.meta.env.VITE_API_LINK;
   const [data, setData] = useState({
     totalProjects: 0,
     totalDiscentes: 0,
@@ -13,10 +14,10 @@ const Relatorios = () => {
   const fetchData = async () => {
     try {
       const [projetosResponse, discentesResponse, doscentesResponse, noticiasResponse] = await Promise.all([
-        axios.get('http://localhost:8080/projetos'),
-        axios.get('http://localhost:8080/discentes'),
-        axios.get('http://localhost:8080/doscentes'),
-        axios.get('http://localhost:8080/noticias'),
+        axios.get(`${api}/projetos`),
+        axios.get(`${api}/discentes`),
+        axios.get(`${api}/doscentes`),
+        axios.get(`${api}/noticias`),
       ]);
 
       const projetos = projetosResponse.data;
